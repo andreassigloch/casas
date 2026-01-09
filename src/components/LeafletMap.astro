@@ -1,0 +1,123 @@
+---
+/**
+ * LeafletMap Component
+ * @author andreas@siglochconsulting.de
+ *
+ * Interactive map using Leaflet + OpenStreetMap
+ * DSGVO-friendly, no API key required
+ */
+
+interface Props {
+  lat: number;
+  lng: number;
+  zoom?: number;
+  markerTitle?: string;
+  height?: string;
+}
+
+const { lat, lng, zoom = 15, markerTitle = '', height = '250px' } = Astro.props;
+const mapId = `map-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="leaflet-map-wrapper" data-testid="leaflet-map">
+  <div
+    id={mapId}
+    class="leaflet-map"
+    style={`height: ${height};`}
+    data-lat={lat}
+    data-lng={lng}
+    data-zoom={zoom}
+    data-marker-title={markerTitle}
+  ></div>
+</div>
+
+<link rel="stylesheet" href="/leaflet/leaflet.css" />
+
+<script>
+  // Load Leaflet dynamically
+  async function initMaps() {
+    // Check if Leaflet is already loaded
+    if (typeof window.L === 'undefined') {
+      await new Promise<void>((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = '/leaflet/leaflet.js';
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error('Failed to load Leaflet'));
+        document.head.appendChild(script);
+      });
+    }
+
+    // Initialize all maps on the page
+    const mapContainers = document.querySelectorAll('.leaflet-map');
+
+    mapContainers.forEach((container) => {
+      const el = container as HTMLElement;
+
+      // Skip if already initialized
+      if (el.dataset.initialized === 'true') return;
+
+      const lat = parseFloat(el.dataset.lat || '0');
+      const lng = parseFloat(el.dataset.lng || '0');
+      const zoom = parseInt(el.dataset.zoom || '15', 10);
+      const markerTitle = el.dataset.markerTitle || '';
+
+      const L = (window as any).L;
+
+      // Fix default marker icon path issue - use local assets
+      delete (L.Icon.Default.prototype as any)._getIconUrl;
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl: '/leaflet/marker-icon-2x.png',
+        iconUrl: '/leaflet/marker-icon.png',
+        shadowUrl: '/leaflet/marker-shadow.png',
+      });
+
+      const map = L.map(el.id).setView([lat, lng], zoom);
+
+      // OpenStreetMap tiles
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map);
+
+      // Add marker
+      const marker = L.marker([lat, lng]).addTo(map);
+      if (markerTitle) {
+        marker.bindPopup(markerTitle);
+      }
+
+      // Mark as initialized
+      el.dataset.initialized = 'true';
+    });
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMaps);
+  } else {
+    initMaps();
+  }
+
+  // Also run on Astro page transitions
+  document.addEventListener('astro:page-load', initMaps);
+</script>
+
+<style>
+  .leaflet-map-wrapper {
+    border-radius: var(--radius-base);
+    overflow: hidden;
+  }
+
+  .leaflet-map {
+    width: 100%;
+    z-index: 1;
+  }
+
+  /* Fix Leaflet controls styling */
+  :global(.leaflet-control-zoom a) {
+    color: var(--color-text) !important;
+  }
+
+  :global(.leaflet-popup-content-wrapper) {
+    border-radius: var(--radius-base) !important;
+  }
+</style>

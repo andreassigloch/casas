@@ -102,7 +102,7 @@ export const apartments = [
       de: 'Renoviertes Bauernhaus der Urgroßmutter mit Pool und 5000m² Garten',
       en: 'Renovated great-grandmother\'s farmhouse with pool and 5000m² garden',
     },
-    geo: { lat: 38.4580, lng: -9.0920 },
+    geo: { lat: 38.4712, lng: -9.1202 },
     images: [
       { src: '/images/apartments/casal-regina/19.webp', alt: 'Casal Regina - Außenbereich' },
       { src: '/images/apartments/casal-regina/01.webp', alt: 'Casal Regina - Blumenweg zum Haus' },
@@ -143,7 +143,7 @@ export const apartments = [
       de: 'Großzügige Dachterrasse mit BBQ direkt an der Strandpromenade',
       en: 'Spacious rooftop terrace with BBQ right on the beach promenade',
     },
-    geo: { lat: 38.4437, lng: -9.1020 },
+    geo: { lat: 38.4437, lng: -9.1040 },
   },
   {
     id: 'marceana',
@@ -161,7 +161,7 @@ export const apartments = [
       de: 'Beste Meeraussicht mit Panorama-Glasfront und großer Dachterrasse',
       en: 'Best sea view with panoramic glass front and large rooftop terrace',
     },
-    geo: { lat: 38.4437, lng: -9.1020 },
+    geo: { lat: 38.4437, lng: -9.1040 },
   },
 ] as const;
 

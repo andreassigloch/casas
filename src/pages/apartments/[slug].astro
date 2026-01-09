@@ -8,6 +8,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ImageGallery from '../../components/ImageGallery.astro';
+import LeafletMap from '../../components/LeafletMap.astro';
 import { siteConfig, apartments } from '@lib/config';
 
 export function getStaticPaths() {
@@ -136,10 +137,12 @@ const featureLabels: Record<string, string> = {
             <div class="location-card">
               <h3>Lage</h3>
               <p class="address">{apartment.address}</p>
-              <!-- TODO: Add Google Maps embed -->
-              <div class="map-placeholder">
-                Karte wird geladen...
-              </div>
+              <LeafletMap
+                lat={apartment.geo.lat}
+                lng={apartment.geo.lng}
+                markerTitle={apartment.name}
+                zoom={16}
+              />
             </div>
           </aside>
         </div>
@@ -360,15 +363,6 @@ const featureLabels: Record<string, string> = {
     margin-bottom: var(--space-4);
   }
 
-  .map-placeholder {
-    height: 200px;
-    background: var(--color-gray-100);
-    border-radius: var(--radius-base);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text-light);
-  }
 
   /* Info CTA */
   .info-cta {
