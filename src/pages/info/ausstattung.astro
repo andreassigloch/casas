@@ -1,0 +1,326 @@
+---
+/**
+ * Ausstattung Info Page
+ * @author andreas@siglochconsulting.de
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import { siteConfig } from '@lib/config';
+---
+
+<BaseLayout
+  title="Ausstattung - Sesimbrinha"
+  description="Komplette Ausstattung unserer Ferienwohnungen: WiFi, Küche, Waschmaschine, Pool und mehr."
+>
+  <Header />
+
+  <main>
+    <PageHero
+      title="Ausstattung"
+      subtitle="Alles da, was Sie auch zu Hause erwarten würden"
+      compact
+    />
+
+    <section class="info-content">
+      <div class="container">
+        <div class="content-wrapper">
+
+          <article class="info-section" data-testid="section-allgemein">
+            <h2>Allgemein</h2>
+            <p>
+              Da wir unsere Mietobjekte auch privat nutzen, finden Sie alles vor, was Sie auch zu Hause erwarten
+              würden. Wenn etwas kaputt geht, lassen Sie es uns bitte wissen, damit wir uns darum kümmern können.
+            </p>
+          </article>
+
+          <article class="info-section" data-testid="section-internet">
+            <h2>Internet (WLAN)</h2>
+
+            <h3>Casa Eugenia (Teresa & Marceana)</h3>
+            <ul class="detail-list">
+              <li><strong>Netzwerk:</strong> "Casa Eugenia"</li>
+              <li><strong>Passwort:</strong> 5ECEACC6</li>
+              <li><strong>Fallback:</strong> "NOS73" / Passwort: HEPT3JW6</li>
+            </ul>
+            <p>
+              Bitte lassen Sie die Repeater, wo sie sind, und wenn es Probleme gibt, versuchen Sie, den Router
+              für 30 Sekunden vom Strom zu trennen.
+            </p>
+
+            <h3>Casal Regina</h3>
+            <ul class="detail-list">
+              <li><strong>Geschwindigkeit:</strong> 500 Mbps</li>
+              <li><strong>Netzwerk:</strong> "Regina"</li>
+              <li><strong>Passwort:</strong> CASAL2020</li>
+            </ul>
+            <p>
+              Alternative Zugangsdaten finden Sie auf einem Zettel beim Fernseher. Bei Problemen hilft es oft,
+              den Router kurz vom TV-Board zu trennen.
+            </p>
+          </article>
+
+          <article class="info-section" data-testid="section-haustechnik">
+            <h2>Haustechnik</h2>
+
+            <h3>Warmwasser (Casa Eugenia)</h3>
+            <p>
+              Falls das Warmwasser nicht funktioniert: Boiler neu starten. Danach bitte nicht wundern, wenn es
+              zwei Minuten unter der Dusche dauert – die Energie kommt von den Solarpanelen auf dem Dach.
+            </p>
+
+            <h3>Fernsehen</h3>
+            <p>
+              Es gibt nationales Kabel und internationalen Satellitenempfang. Wenn Sie umschalten möchten,
+              drücken Sie die Taste mit den drei Punkten oben rechts auf der Fernbedienung und ändern Sie die Quelle.
+            </p>
+
+            <h3>Kaffeemaschinen</h3>
+            <p>
+              Wir haben Modelle für Pads. Die bekommen Sie im Supermarkt.
+            </p>
+
+            <h3>Waschmaschinen</h3>
+            <p>
+              Benutzen Sie sie gerne, vorzugsweise mit den Universal-Waschpads, die in jedem Supermarkt erhältlich
+              sind. Im Allgemeinen reichen die Kurzwaschprogramme ("Rapido") aus. Bitte benutzen Sie die Trockner
+              nur in der kalten Jahreszeit.
+            </p>
+
+            <h3>Heizung</h3>
+            <p>
+              Bei uns ist Heizung vorhanden, anders als in vielen portugiesischen Häusern. Allerdings sind die
+              Gaspreise oder Pelletpreise eher hoch, so dass wir <strong>separat abrechnen</strong>. Bei Ankunft
+              und vor Abreise liest Ana mit Ihnen in Casa Eugenia den Zähler ab.
+            </p>
+            <p>
+              In der <strong>Casal Regina</strong> gibt es einen <strong>Pelletofen</strong>. Pellets gibt es in
+              den größeren Supermärkten. Rechnen Sie mit einem Sack pro Tag. Bitte Nutzung nur nach Einweisung.
+            </p>
+          </article>
+
+          <article class="info-section" data-testid="section-grillen">
+            <h2>Grillen (BBQ)</h2>
+            <p>
+              Um Ihnen den sesimbrensischen Volkssport authentisch zu ermöglichen, gibt es bei Casa Eugenia
+              traditionelle Grillstellen. Sie ziehen langsam aber kräftig. Sie brauchen wenig Kohle, aber wie
+              die Profis vor den Restaurants sollten Sie sie am besten eine Stunde vorheizen, bis die Temperatur
+              optimal ist. Auch im Garten von Casal Regina lässt sich hervorragend grillen.
+            </p>
+            <p>
+              Einen Sack Holzkohle und ein Päckchen Anzünder bekommen Sie an jeder Ecke. Bitte achten Sie darauf,
+              keine Tannenzapfen oder Flüssiganzünder zu verwenden. Besonders in ländlichen Gebieten besteht
+              latente Brandgefahr. Bitte seien Sie vorsichtig!
+            </p>
+          </article>
+
+          <article class="info-section" data-testid="section-pool">
+            <h2>Pool & Strand</h2>
+            <p>
+              Bitte nehmen Sie die Handtücher nicht mit zum Strand. Stattdessen sind praktische Strandtücher in
+              allen Apartments verfügbar. Mit etwas Glück hat der vorherige Mieter einen Sonnenschirm für Sie
+              hinterlassen. Vor dem Benutzen der Waschmaschine oder des Trockners bitte Sand von Strandtüchern
+              und Badetextilien entfernen.
+            </p>
+            <p>
+              Am Pool von Casal Regina bitte auf Glas verzichten – Plastikgeschirr finden Sie im Esszimmerschrank.
+              Außerdem bitten wir Sie, vor der Poolnutzung zu duschen, um Sonnencreme abzuspülen und das Poolwasser
+              sauber zu halten. Poolnutzung auf eigene Gefahr.
+            </p>
+          </article>
+
+          <aside class="info-sidebar">
+            <div class="sidebar-card">
+              <h3>Inklusive</h3>
+              <ul class="checklist">
+                <li>WiFi (schnell)</li>
+                <li>Satellit-TV</li>
+                <li>Voll ausgestattete Küche</li>
+                <li>Waschmaschine & Trockner</li>
+                <li>Bettwäsche & Handtücher</li>
+                <li>Strandtücher</li>
+                <li>Kaffeemaschine (Pads)</li>
+                <li>Bügeleisen</li>
+                <li>Grundvorräte</li>
+              </ul>
+            </div>
+            <div class="sidebar-card">
+              <h3>Je nach Objekt</h3>
+              <ul class="feature-list">
+                <li>Pool (Casal Regina)</li>
+                <li>BBQ-Grillstellen</li>
+                <li>Terrasse / Dachterrasse</li>
+                <li>Garten</li>
+                <li>Parkplätze</li>
+              </ul>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="info-nav">
+      <div class="container">
+        <h3>Weitere Informationen</h3>
+        <div class="nav-links">
+          <a href="/info/hausordnung/" class="nav-link">Hausordnung</a>
+          <a href="/info/anreise/" class="nav-link">Anreise</a>
+          <a href="/info/haustiere/" class="nav-link">Haustiere</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .info-content {
+    padding: var(--space-12) 0;
+  }
+
+  .content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+  }
+
+  .info-section {
+    margin-bottom: var(--space-10);
+    padding-bottom: var(--space-10);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .info-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .info-section h2 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .info-section h3 {
+    font-size: var(--text-lg);
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-3);
+    color: var(--color-text);
+  }
+
+  .info-section p {
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+  }
+
+  .detail-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-3) 0;
+    background: var(--color-background-alt);
+    border-radius: var(--radius-base);
+    padding: var(--space-4);
+  }
+
+  .detail-list li {
+    padding: var(--space-1) 0;
+    font-size: var(--text-sm);
+  }
+
+  .info-sidebar {
+    position: sticky;
+    top: var(--space-6);
+    align-self: start;
+  }
+
+  .sidebar-card {
+    background: var(--color-background-alt);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+  }
+
+  .sidebar-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-4);
+    color: var(--color-primary);
+  }
+
+  .checklist, .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .checklist li, .feature-list li {
+    padding: var(--space-2) 0;
+    padding-left: var(--space-6);
+    position: relative;
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+  }
+
+  .checklist li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: bold;
+  }
+
+  .feature-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+  }
+
+  .info-nav {
+    padding: var(--space-12) 0;
+    background: var(--color-background-alt);
+    text-align: center;
+  }
+
+  .info-nav h3 {
+    margin-bottom: var(--space-6);
+  }
+
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-background);
+    border-radius: var(--radius-base);
+    color: var(--color-text);
+    transition: all var(--transition-base);
+  }
+
+  .nav-link:hover {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  @media (max-width: 900px) {
+    .content-wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    .info-sidebar {
+      position: static;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-4);
+    }
+
+    .sidebar-card {
+      margin-bottom: 0;
+    }
+  }
+</style>

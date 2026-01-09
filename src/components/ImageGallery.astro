@@ -1,0 +1,399 @@
+---
+/**
+ * Image Gallery Component
+ * @author andreas@siglochconsulting.de
+ *
+ * Responsive image gallery with hero + thumbnail grid
+ * Lightbox functionality via vanilla JS
+ */
+
+interface Image {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  images: Image[];
+  apartmentName: string;
+}
+
+const { images, apartmentName } = Astro.props;
+
+const heroImage = images[0];
+const thumbnails = images.slice(1);
+---
+
+<div class="gallery" data-testid="image-gallery">
+  <!-- Hero Image -->
+  <div class="gallery-hero" data-testid="gallery-hero">
+    <button type="button" class="gallery-hero-btn" data-index="0" aria-label="Bild vergrößern">
+      <img src={heroImage.src} alt={heroImage.alt} loading="eager" />
+    </button>
+    <span class="image-counter">{images.length} Fotos</span>
+  </div>
+
+  <!-- Thumbnail Grid -->
+  <div class="gallery-thumbnails" data-testid="gallery-thumbnails">
+    {thumbnails.slice(0, 4).map((img, idx) => (
+      <button
+        type="button"
+        class="thumbnail-btn"
+        data-index={idx + 1}
+        aria-label={`Bild ${idx + 2} anzeigen: ${img.alt}`}
+      >
+        <img src={img.src} alt={img.alt} loading="lazy" />
+        {idx === 3 && thumbnails.length > 4 && (
+          <span class="more-overlay">+{thumbnails.length - 4}</span>
+        )}
+      </button>
+    ))}
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Bildergalerie" hidden>
+  <div class="lightbox-backdrop"></div>
+  <div class="lightbox-content">
+    <button type="button" class="lightbox-close" aria-label="Schließen">&times;</button>
+    <button type="button" class="lightbox-prev" aria-label="Vorheriges Bild">&#8249;</button>
+    <div class="lightbox-image-container">
+      <img src="" alt="" class="lightbox-image" />
+    </div>
+    <button type="button" class="lightbox-next" aria-label="Nächstes Bild">&#8250;</button>
+    <div class="lightbox-counter"></div>
+  </div>
+</div>
+
+<script define:vars={{ images }}>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = lightbox.querySelector('.lightbox-image');
+  const lightboxCounter = lightbox.querySelector('.lightbox-counter');
+  let currentIndex = 0;
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightbox();
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  function updateLightbox() {
+    const img = images[currentIndex];
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightboxCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateLightbox();
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateLightbox();
+  }
+
+  // Event listeners
+  document.querySelectorAll('[data-index]').forEach(btn => {
+    btn.addEventListener('click', () => openLightbox(parseInt(btn.dataset.index)));
+  });
+
+  lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+  lightbox.querySelector('.lightbox-backdrop').addEventListener('click', closeLightbox);
+  lightbox.querySelector('.lightbox-prev').addEventListener('click', showPrev);
+  lightbox.querySelector('.lightbox-next').addEventListener('click', showNext);
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.hidden) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showPrev();
+    if (e.key === 'ArrowRight') showNext();
+  });
+</script>
+
+<style>
+  .gallery {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-2);
+    height: 50vh;
+    min-height: 400px;
+    max-height: 600px;
+  }
+
+  .gallery-hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  }
+
+  .gallery-hero-btn {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    background: none;
+  }
+
+  .gallery-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .gallery-hero-btn:hover img {
+    transform: scale(1.02);
+  }
+
+  .image-counter {
+    position: absolute;
+    bottom: var(--space-4);
+    right: var(--space-4);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-pill);
+    font-size: var(--text-sm);
+  }
+
+  .gallery-thumbnails {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2);
+  }
+
+  .thumbnail-btn {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    background: none;
+  }
+
+  .thumbnail-btn:first-child {
+    border-radius: 0 var(--radius-lg) 0 0;
+  }
+
+  .thumbnail-btn:nth-child(2) {
+    border-radius: 0;
+  }
+
+  .thumbnail-btn:nth-child(3) {
+    border-radius: 0;
+  }
+
+  .thumbnail-btn:last-child {
+    border-radius: 0 0 var(--radius-lg) 0;
+  }
+
+  .thumbnail-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-base);
+  }
+
+  .thumbnail-btn:hover img {
+    transform: scale(1.05);
+  }
+
+  .more-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-2xl);
+    font-weight: var(--font-semibold);
+  }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox[hidden] {
+    display: none;
+  }
+
+  .lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+  }
+
+  .lightbox-content {
+    position: relative;
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-image-container {
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-image {
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    background: none;
+    border: none;
+    color: white;
+    font-size: var(--text-4xl);
+    cursor: pointer;
+    padding: var(--space-2);
+    line-height: 1;
+    z-index: 10;
+  }
+
+  .lightbox-prev,
+  .lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: var(--text-4xl);
+    cursor: pointer;
+    padding: var(--space-4) var(--space-6);
+    border-radius: var(--radius-base);
+    transition: background var(--transition-base);
+  }
+
+  .lightbox-prev:hover,
+  .lightbox-next:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .lightbox-prev {
+    left: var(--space-4);
+  }
+
+  .lightbox-next {
+    right: var(--space-4);
+  }
+
+  .lightbox-counter {
+    position: absolute;
+    bottom: var(--space-6);
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: var(--text-sm);
+    background: rgba(0, 0, 0, 0.5);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-pill);
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .gallery {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr auto;
+      height: auto;
+      min-height: unset;
+      max-height: unset;
+    }
+
+    .gallery-hero {
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      height: 250px;
+    }
+
+    .gallery-thumbnails {
+      height: 100px;
+    }
+
+    .thumbnail-btn:first-child {
+      border-radius: 0;
+    }
+
+    .thumbnail-btn:last-child {
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    }
+
+    .lightbox-content {
+      width: 100vw;
+      height: 100vh;
+      padding: var(--space-12) var(--space-4);
+      box-sizing: border-box;
+    }
+
+    .lightbox-image {
+      max-height: 60vh;
+      max-width: 100%;
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--text-2xl);
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1010;
+      border-radius: var(--radius-base);
+    }
+
+    .lightbox-prev {
+      left: var(--space-2);
+    }
+
+    .lightbox-next {
+      right: var(--space-2);
+    }
+
+    .lightbox-counter {
+      position: fixed;
+      bottom: var(--space-8);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1010;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: var(--space-4);
+      right: var(--space-4);
+      font-size: var(--text-4xl);
+      padding: var(--space-2);
+      z-index: 1010;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: var(--radius-base);
+    }
+  }
+</style>

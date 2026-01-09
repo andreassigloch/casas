@@ -1,0 +1,284 @@
+---
+/**
+ * Header Component
+ * @author andreas@siglochconsulting.de
+ *
+ * Sticky navigation with pill-shaped buttons and language switcher
+ */
+
+import { siteConfig } from '@lib/config';
+import { t, getLocaleFromUrl, getLocalizedPath } from '@i18n/index';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+const currentPath = Astro.url.pathname;
+const locale = getLocaleFromUrl(Astro.url);
+
+// Navigation items with i18n
+const navItems = [
+  { labelKey: 'nav.home' as const, href: '/' },
+  { labelKey: 'nav.apartments' as const, href: '/apartments/' },
+  { labelKey: 'nav.info' as const, href: '/info/' },
+  { labelKey: 'nav.contact' as const, href: '/kontakt/' },
+];
+---
+
+<header class="header">
+  <div class="header-background"></div>
+  <nav class="nav container">
+    <a href={getLocalizedPath('/', locale)} class="logo" data-testid="logo">
+      <!-- Sardine Logo - Line Art -->
+      <svg class="logo-icon" viewBox="0 0 64 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <g transform="translate(64,0) scale(-1,1)">
+          <path d="M4 16 C4 10, 12 6, 28 6 C44 6, 54 10, 58 16 C54 22, 44 26, 28 26 C12 26, 4 22, 4 16 Z"/>
+          <path d="M58 16 L64 8 L62 16 L64 24 L58 16"/>
+          <path d="M24 6 Q28 2, 32 6"/>
+          <path d="M30 26 Q32 29, 36 26"/>
+          <path d="M14 10 Q12 16, 14 22"/>
+          <circle cx="10" cy="15" r="2" fill="currentColor" stroke="none"/>
+          <path d="M20 10 Q24 16, 20 22" opacity="0.5"/>
+          <path d="M30 8 Q34 16, 30 24" opacity="0.5"/>
+          <path d="M40 9 Q44 16, 40 23" opacity="0.5"/>
+          <path d="M50 11 Q53 16, 50 21" opacity="0.5"/>
+        </g>
+      </svg>
+      <span class="logo-text">Sesimbrinha <span class="logo-accent">Casas</span></span>
+    </a>
+
+    <div class="nav-right">
+      <LanguageSwitcher />
+
+      <button class="nav-toggle" aria-label="Navigation öffnen" aria-expanded="false" data-testid="nav-toggle">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+
+    <ul class="nav-menu" data-testid="nav-menu">
+      {navItems.map((item) => {
+        const localizedHref = getLocalizedPath(item.href, locale);
+        const isActive = currentPath === localizedHref || currentPath === localizedHref.slice(0, -1);
+        return (
+          <li class="nav-item">
+            <a
+              href={localizedHref}
+              class:list={['nav-link', { active: isActive }]}
+              data-testid={`nav-link-${item.href.replace(/\//g, '').replace(/#/g, '') || 'home'}`}
+            >
+              {t(item.labelKey, locale)}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    width: 100%;
+  }
+
+  .header-background {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-700) 0%,
+      var(--color-primary-600) 25%,
+      var(--color-primary-500) 50%,
+      var(--color-primary-600) 75%,
+      var(--color-primary-700) 100%
+    );
+    opacity: 0.95;
+    backdrop-filter: blur(10px);
+  }
+
+  .nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--container-padding);
+    min-height: 70px;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+    z-index: 2;
+  }
+
+  .logo-icon {
+    width: 48px;
+    height: 24px;
+    color: var(--color-secondary-300);
+  }
+
+  .logo-text {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--color-background);
+    line-height: 1.2;
+  }
+
+  .logo-accent {
+    color: var(--color-secondary-300);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    z-index: 2;
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 2;
+  }
+
+  .hamburger,
+  .hamburger::before,
+  .hamburger::after {
+    width: 30px;
+    height: 3px;
+    background: var(--color-background);
+    border-radius: 3px;
+    transition: all var(--transition-base);
+  }
+
+  .hamburger {
+    position: relative;
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .hamburger::before {
+    top: -8px;
+  }
+
+  .hamburger::after {
+    bottom: -8px;
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    margin: 0;
+  }
+
+  .nav-link {
+    display: inline-block;
+    padding: var(--space-2) var(--space-4);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: var(--font-medium);
+    color: var(--color-background);
+    text-decoration: none;
+    border-radius: var(--radius-pill);
+    transition: all var(--transition-base);
+    background: transparent;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--color-background);
+    transform: translateY(-1px);
+  }
+
+  .nav-link.active {
+    background: var(--color-primary-800);
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 70px;
+      right: -100%;
+      flex-direction: column;
+      background: var(--color-primary-700);
+      width: 100%;
+      max-width: 300px;
+      height: calc(100vh - 70px);
+      padding: var(--space-8) var(--space-6);
+      gap: var(--space-4);
+      align-items: flex-start;
+      transition: right var(--transition-base);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .nav-menu.active {
+      right: 0;
+    }
+
+    .nav-link {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+    }
+  }
+</style>
+
+<script>
+  // Mobile navigation toggle
+  document.addEventListener('DOMContentLoaded', () => {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', () => {
+        const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!isExpanded));
+        navMenu.classList.toggle('active');
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (!target.closest('.nav') && navMenu.classList.contains('active')) {
+          navMenu.classList.remove('active');
+          navToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Close menu on link click
+      navMenu.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+          navToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  });
+</script>

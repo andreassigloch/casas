@@ -1,0 +1,471 @@
+---
+/**
+ * Homepage - Sesimbrinha Casas
+ * @author andreas@siglochconsulting.de
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { siteConfig, apartments } from '@lib/config';
+---
+
+<BaseLayout
+  title={siteConfig.title}
+  description={siteConfig.description}
+>
+  <Header />
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" data-testid="hero-section">
+      <div class="container hero-content">
+        <h1>Urlaub am Atlantik</h1>
+        <p>Traumhafte Ferienhäuser & Apartments direkt an der portugiesischen Küste. Erleben Sie Sesimbra mit Meerblick, Pool und authentischem Charme.</p>
+        <div class="hero-actions">
+          <a href="/apartments/" class="button button-accent" data-testid="cta-apartments">
+            Unterkünfte entdecken
+          </a>
+          <a href="/kontakt/" class="button button-outline" data-testid="cta-contact">
+            Mehr erfahren
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apartments Grid -->
+    <section class="apartments-section" data-testid="apartments-section">
+      <div class="container">
+        <h2>Unsere Unterkünfte</h2>
+        <div class="apartments-grid">
+          {apartments.map((apt) => (
+            <a href={`/apartments/${apt.slug.de}/`} class="apartment-card" data-testid={`apartment-${apt.id}`}>
+              <div class="apartment-image">
+                {apt.images && apt.images.length > 0 && (
+                  <img src={apt.images[0].src} alt={apt.images[0].alt} loading="lazy" />
+                )}
+                <div class="apartment-badge">{apt.type === 'house' ? 'Landhaus' : 'Apartment'}</div>
+              </div>
+              <div class="apartment-content">
+                <h3>{apt.name}</h3>
+                <p class="apartment-location">{apt.location}</p>
+                <p class="apartment-highlight">{apt.highlight.de}</p>
+                <ul class="apartment-specs">
+                  <li><strong>{apt.guests}</strong> Gäste</li>
+                  <li><strong>{apt.bedrooms}</strong> Schlafzimmer</li>
+                  <li><strong>{apt.size.indoor}</strong>m² Wohnfläche</li>
+                </ul>
+                <span class="apartment-link">Details ansehen →</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" data-testid="about-section">
+      <div class="container">
+        <div class="about-content">
+          <h2>Familiengeschichte seit Generationen</h2>
+          <p>
+            Unsere Ferienwohnungen sind mehr als nur Unterkünfte – sie sind Teil einer
+            Familiengeschichte. Das Landhaus <strong>Casal Regina</strong> war einst das
+            Bauernhaus unserer Urgroßmutter, liebevoll renoviert im Jahr 2020. Die Apartments
+            <strong>Teresa</strong> und <strong>Marceana</strong> tragen die Namen unserer
+            Großmütter und liegen direkt an der Strandpromenade von Sesimbra.
+          </p>
+          <p>
+            Ana, unsere Vermieterin vor Ort, kümmert sich persönlich um Ihren Aufenthalt –
+            von der Schlüsselübergabe bis zu Insider-Tipps für die besten Restaurants.
+          </p>
+          <a href={siteConfig.stuffUrl} class="button button-secondary" target="_blank" rel="noopener">
+            Sesimbra entdecken auf stuff.sesimbrinha.de →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Info -->
+    <section class="info-section" data-testid="info-section">
+      <div class="container">
+        <h2>Gut zu wissen</h2>
+        <div class="info-grid">
+          <a href="/info/anreise/" class="info-card" data-testid="info-arrival">
+            <span class="info-icon">✈️</span>
+            <h3>Anreise</h3>
+            <p>40 Min. vom Flughafen Lissabon</p>
+          </a>
+          <a href="/info/haustiere/" class="info-card" data-testid="info-pets">
+            <span class="info-icon">🐕</span>
+            <h3>Haustiere</h3>
+            <p>Hunde willkommen (€25)</p>
+          </a>
+          <a href="/info/ausstattung/" class="info-card" data-testid="info-amenities">
+            <span class="info-icon">📶</span>
+            <h3>Ausstattung</h3>
+            <p>WiFi, TV, voll ausgestattete Küche</p>
+          </a>
+          <a href="/info/hausordnung/" class="info-card" data-testid="info-rules">
+            <span class="info-icon">📋</span>
+            <h3>Hausordnung</h3>
+            <p>Check-in, Kaution, Regeln</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" data-testid="cta-section">
+      <div class="container">
+        <h2>Bereit für Ihren Sesimbra-Urlaub?</h2>
+        <p>Schreiben Sie uns für Verfügbarkeit und Preise – wir antworten innerhalb von 24 Stunden.</p>
+        <a href="/kontakt/" class="button button-primary button-large">Jetzt anfragen</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Hero - exakt aus Mockup kopiert */
+  .hero {
+    background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-secondary-500) 50%, var(--color-secondary-400) 100%);
+    color: white;
+    padding: var(--space-16) 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,138.7C672,128,768,160,864,181.3C960,203,1056,213,1152,197.3C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom;
+    background-size: cover;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    font-size: var(--text-5xl);
+    margin-bottom: var(--space-6);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: white;
+  }
+
+  .hero p {
+    font-size: var(--text-xl);
+    opacity: 0.95;
+    margin-bottom: var(--space-8);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Apartments Grid */
+  .apartments-section {
+    padding: var(--space-20) 0;
+    background: var(--color-background);
+  }
+
+  .apartments-section h2 {
+    text-align: center;
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-12);
+    color: var(--color-text);
+  }
+
+  .apartments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-8);
+  }
+
+  .apartment-card {
+    display: block;
+    background: var(--color-background);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    text-decoration: none;
+    color: inherit;
+    transition: all var(--transition-base);
+  }
+
+  .apartment-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .apartment-image {
+    height: 220px;
+    background: linear-gradient(135deg, var(--color-primary-100), var(--color-primary-200));
+    position: relative;
+    overflow: hidden;
+  }
+
+  .apartment-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .apartment-card:hover .apartment-image img {
+    transform: scale(1.05);
+  }
+
+  .apartment-badge {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    background: var(--color-primary);
+    color: white;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-pill);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+  }
+
+  .apartment-content {
+    padding: var(--space-6);
+  }
+
+  .apartment-content h3 {
+    font-size: var(--text-2xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .apartment-location {
+    color: var(--color-text-light);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-3);
+  }
+
+  .apartment-highlight {
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-4);
+  }
+
+  .apartment-specs {
+    display: flex;
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-4) 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-light);
+  }
+
+  .apartment-specs strong {
+    color: var(--color-text);
+  }
+
+  .apartment-link {
+    color: var(--color-primary);
+    font-weight: var(--font-semibold);
+  }
+
+  /* About Section */
+  .about-section {
+    padding: var(--space-20) 0;
+    background: var(--color-primary-50);
+  }
+
+  .about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .about-content h2 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-8);
+    color: var(--color-text);
+  }
+
+  .about-content p {
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
+  }
+
+  /* Info Grid */
+  .info-section {
+    padding: var(--space-16) 0;
+    background: var(--color-background);
+  }
+
+  .info-section h2 {
+    text-align: center;
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-10);
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-6);
+  }
+
+  .info-card {
+    display: block;
+    padding: var(--space-6);
+    background: var(--color-background-alt);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    transition: all var(--transition-base);
+  }
+
+  .info-card:hover {
+    background: var(--color-primary-50);
+    transform: translateY(-4px);
+  }
+
+  .info-icon {
+    font-size: var(--text-4xl);
+    display: block;
+    margin-bottom: var(--space-3);
+  }
+
+  .info-card h3 {
+    font-size: var(--text-lg);
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .info-card p {
+    color: var(--color-text-light);
+    font-size: var(--text-sm);
+    margin: 0;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: var(--space-20) 0;
+    background: var(--color-primary);
+    text-align: center;
+    color: white;
+  }
+
+  .cta-section h2 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .cta-section p {
+    font-size: var(--text-lg);
+    opacity: 0.9;
+    margin-bottom: var(--space-8);
+  }
+
+  /* Buttons */
+  .button {
+    display: inline-block;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-base);
+    font-weight: var(--font-semibold);
+    text-decoration: none;
+    transition: all var(--transition-base);
+  }
+
+  .button-large {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--text-lg);
+  }
+
+  .button-primary {
+    background: var(--color-primary);
+    color: var(--color-background);
+  }
+
+  .button-primary:hover {
+    background: var(--color-primary-700);
+    transform: translateY(-2px);
+  }
+
+  .cta-section .button-primary {
+    background: white;
+    color: var(--color-primary);
+  }
+
+  .cta-section .button-primary:hover {
+    background: var(--color-primary-50);
+  }
+
+  .button-secondary {
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+  }
+
+  .button-secondary:hover {
+    background: var(--color-primary-50);
+  }
+
+  .button-accent {
+    background: var(--color-accent);
+    color: white;
+    border-radius: var(--radius-pill);
+    padding: var(--space-4) var(--space-8);
+  }
+
+  .button-accent:hover {
+    background: var(--color-accent-600);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+  }
+
+  .button-outline {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    border-radius: var(--radius-pill);
+    padding: var(--space-4) var(--space-8);
+  }
+
+  .button-outline:hover {
+    background: white;
+    color: var(--color-primary);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: var(--text-3xl);
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .apartments-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .info-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,75 @@
+---
+/**
+ * PageHero Component - Atlantik Theme
+ * @author andreas@siglochconsulting.de
+ *
+ * Consistent hero section for all sub-pages
+ * Matches the main hero gradient style from color-mockup-atlantik.html
+ */
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  compact?: boolean;
+}
+
+const { title, subtitle, compact = false } = Astro.props;
+---
+
+<section class:list={['page-hero', { 'page-hero--compact': compact }]}>
+  <div class="container">
+    <h1>{title}</h1>
+    {subtitle && <p>{subtitle}</p>}
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-secondary-500) 50%, var(--color-secondary-400) 100%);
+    color: white;
+    padding: var(--space-16) 0;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,138.7C672,128,768,160,864,181.3C960,203,1056,213,1152,197.3C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom;
+    background-size: cover;
+  }
+
+  .page-hero--compact {
+    padding: var(--space-12) 0;
+  }
+
+  .page-hero .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-hero h1 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-4);
+    color: white;
+  }
+
+  .page-hero p {
+    font-size: var(--text-xl);
+    opacity: 0.95;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .page-hero h1 {
+      font-size: var(--text-3xl);
+    }
+
+    .page-hero p {
+      font-size: var(--text-lg);
+    }
+  }
+</style>

@@ -1,0 +1,426 @@
+---
+/**
+ * Apartment Detail Page
+ * @author andreas@siglochconsulting.de
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ImageGallery from '../../components/ImageGallery.astro';
+import { siteConfig, apartments } from '@lib/config';
+
+export function getStaticPaths() {
+  return apartments.map((apt) => ({
+    params: { slug: apt.slug.de },
+    props: { apartment: apt },
+  }));
+}
+
+const { apartment } = Astro.props;
+
+const featureLabels: Record<string, string> = {
+  'pool': 'Pool',
+  'bbq': 'BBQ/Grill',
+  'garden': 'Garten',
+  'parking': 'Parkplatz',
+  'wheelchair-accessible': 'Barrierefreie Duschen',
+  'terrace': 'Terrasse',
+  'sea-view': 'Meerblick',
+  'separate-unit': 'Separater Bereich mit eigenem Bad',
+  'panorama-view': 'Panoramablick',
+  'glass-front': 'Panorama-Glasfront',
+};
+---
+
+<BaseLayout
+  title={`${apartment.name} - Sesimbrinha`}
+  description={apartment.highlight.de}
+>
+  <Header />
+
+  <main>
+    <!-- Image Gallery -->
+    <section class="apartment-gallery" data-testid="apartment-gallery">
+      <div class="container">
+        {apartment.images && apartment.images.length > 0 ? (
+          <ImageGallery images={apartment.images} apartmentName={apartment.name} />
+        ) : (
+          <div class="gallery-placeholder">
+            <div class="apartment-badge">{apartment.type === 'house' ? 'Landhaus' : 'Apartment'}</div>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="apartment-content">
+      <div class="container">
+        <div class="content-grid">
+          <div class="main-content">
+            <h1>{apartment.name}</h1>
+            <p class="location">{apartment.location}</p>
+            <p class="highlight">{apartment.highlight.de}</p>
+
+            <div class="description">
+              <h2>Beschreibung</h2>
+              <p>
+                <!-- TODO: Add full description from content files -->
+                Detaillierte Beschreibung folgt. Bitte schauen Sie sich die Bilder an und
+                kontaktieren Sie uns für weitere Informationen.
+              </p>
+            </div>
+
+            <div class="amenities">
+              <h2>Ausstattung</h2>
+              <ul class="amenities-list">
+                <li>WiFi</li>
+                <li>Satellit-TV</li>
+                <li>Voll ausgestattete Küche</li>
+                <li>Waschmaschine & Trockner</li>
+                <li>Bettwäsche & Handtücher</li>
+                <li>Kaffeemaschine</li>
+                {apartment.features.map((f) => (
+                  <li>{featureLabels[f] || f}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <aside class="sidebar">
+            <div class="booking-card">
+              <h3>Auf einen Blick</h3>
+
+              <div class="specs-grid">
+                <div class="spec">
+                  <span class="spec-icon">👥</span>
+                  <span class="spec-value">{apartment.guests} Gäste</span>
+                </div>
+                <div class="spec">
+                  <span class="spec-icon">🛏️</span>
+                  <span class="spec-value">{apartment.bedrooms} Schlafzimmer</span>
+                </div>
+                <div class="spec">
+                  <span class="spec-icon">🚿</span>
+                  <span class="spec-value">{apartment.bathrooms} {apartment.bathrooms === 1 ? 'Bad' : 'Bäder'}</span>
+                </div>
+                <div class="spec">
+                  <span class="spec-icon">📐</span>
+                  <span class="spec-value">{apartment.size.indoor}m² innen</span>
+                </div>
+                {apartment.size.outdoor > 100 && (
+                  <div class="spec">
+                    <span class="spec-icon">🌳</span>
+                    <span class="spec-value">{apartment.size.outdoor}m² außen</span>
+                  </div>
+                )}
+              </div>
+
+              <div class="features-tags">
+                {apartment.features.map((f) => (
+                  <span class="tag">{featureLabels[f] || f}</span>
+                ))}
+              </div>
+
+              <a href="/kontakt/" class="button button-primary button-full">
+                Verfügbarkeit anfragen
+              </a>
+
+              <p class="booking-note">
+                Auch buchbar auf
+                <a href="#" target="_blank" rel="noopener">Airbnb</a> und
+                <a href="#" target="_blank" rel="noopener">Booking.com</a>
+              </p>
+            </div>
+
+            <div class="location-card">
+              <h3>Lage</h3>
+              <p class="address">{apartment.address}</p>
+              <!-- TODO: Add Google Maps embed -->
+              <div class="map-placeholder">
+                Karte wird geladen...
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- More Info CTA -->
+    <section class="info-cta">
+      <div class="container">
+        <h2>Wichtige Informationen</h2>
+        <div class="info-links">
+          <a href="/info/hausordnung/" class="info-link">
+            <span>📋</span> Hausordnung & Check-in
+          </a>
+          <a href="/info/anreise/" class="info-link">
+            <span>✈️</span> Anreise & Parken
+          </a>
+          <a href="/info/haustiere/" class="info-link">
+            <span>🐕</span> Mit Hund reisen
+          </a>
+          <a href={siteConfig.stuffUrl} class="info-link" target="_blank" rel="noopener">
+            <span>🗺️</span> Sesimbra entdecken →
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .apartment-gallery {
+    padding: var(--space-6) 0;
+    background: var(--color-background-alt);
+  }
+
+  .gallery-placeholder {
+    height: 50vh;
+    min-height: 400px;
+    background: linear-gradient(135deg, var(--color-primary-200), var(--color-primary-300));
+    border-radius: var(--radius-lg);
+    position: relative;
+  }
+
+  .apartment-badge {
+    position: absolute;
+    top: var(--space-6);
+    left: var(--space-6);
+    background: var(--color-primary);
+    color: white;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-pill);
+    font-weight: var(--font-semibold);
+  }
+
+  .apartment-content {
+    padding: var(--space-12) 0;
+    position: relative;
+    z-index: 1;
+    background: var(--color-background);
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: var(--space-12);
+  }
+
+  .main-content h1 {
+    font-size: var(--text-4xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .location {
+    color: var(--color-text-light);
+    margin-bottom: var(--space-4);
+  }
+
+  .highlight {
+    font-size: var(--text-xl);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .description, .amenities {
+    padding: var(--space-8) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .description h2, .amenities h2 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .description p {
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+  }
+
+  .amenities-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2) var(--space-4);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .amenities-list li {
+    padding-left: var(--space-5);
+    position: relative;
+    color: var(--color-text-secondary);
+  }
+
+  .amenities-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: bold;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    position: sticky;
+    top: var(--space-6);
+    align-self: start;
+  }
+
+  .booking-card, .location-card {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+  }
+
+  .booking-card h3, .location-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-4);
+  }
+
+  .specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .spec {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .spec-icon {
+    font-size: var(--text-lg);
+  }
+
+  .spec-value {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .features-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+
+  .tag {
+    background: var(--color-primary-50);
+    color: var(--color-primary-700);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-pill);
+    font-size: var(--text-xs);
+  }
+
+  .button {
+    display: block;
+    padding: var(--space-4);
+    background: var(--color-primary);
+    color: white;
+    text-align: center;
+    border-radius: var(--radius-base);
+    text-decoration: none;
+    font-weight: var(--font-semibold);
+    transition: all var(--transition-base);
+  }
+
+  .button:hover {
+    background: var(--color-primary-700);
+  }
+
+  .button-full {
+    width: 100%;
+  }
+
+  .booking-note {
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--color-text-light);
+    margin-top: var(--space-4);
+    margin-bottom: 0;
+  }
+
+  .booking-note a {
+    color: var(--color-primary);
+  }
+
+  .address {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-4);
+  }
+
+  .map-placeholder {
+    height: 200px;
+    background: var(--color-gray-100);
+    border-radius: var(--radius-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-light);
+  }
+
+  /* Info CTA */
+  .info-cta {
+    padding: var(--space-12) 0;
+    background: var(--color-background-alt);
+  }
+
+  .info-cta h2 {
+    text-align: center;
+    margin-bottom: var(--space-8);
+  }
+
+  .info-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-4);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .info-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: var(--color-background);
+    border-radius: var(--radius-base);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: all var(--transition-base);
+  }
+
+  .info-link:hover {
+    background: var(--color-primary-50);
+    transform: translateY(-2px);
+  }
+
+  .info-link span {
+    font-size: var(--text-xl);
+  }
+
+  @media (max-width: 900px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      position: static;
+    }
+
+    .amenities-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

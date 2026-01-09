@@ -1,0 +1,255 @@
+---
+/**
+ * Hausordnung Info Page
+ * @author andreas@siglochconsulting.de
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import { siteConfig } from '@lib/config';
+---
+
+<BaseLayout
+  title="Hausordnung - Sesimbrinha"
+  description="Wichtige Informationen zu Kaution, Check-in/out, Rauchen und allgemeinen Hausregeln für Ihren Aufenthalt."
+>
+  <Header />
+
+  <main>
+    <PageHero
+      title="Hausordnung"
+      subtitle="Alles Wichtige für einen entspannten Aufenthalt"
+      compact
+    />
+
+    <section class="info-content">
+      <div class="container">
+        <div class="content-wrapper">
+
+          <article class="info-section" data-testid="section-kaution">
+            <h2>Kaution & Diverses</h2>
+            <p>
+              Betrag, Zahlungsmethode und Konditionen der Ferienwohnungsvermietung werden durch Ihre Buchung definiert,
+              die Sie über die üblichen Plattformen oder direkt bei uns zu etwas besseren Konditionen vornehmen können.
+            </p>
+            <p>
+              Zusätzlich müssen wir bei Online-Buchungen leider <strong>150 Euro in bar bei Ankunft</strong> verlangen.
+              Wer direkt mietet, kann auch per Banküberweisung im Voraus bezahlen. Ihre Kaution wird Ihnen nach einem
+              positiven Bericht umgehend zurückerstattet – Falls Heizkosten anfallen, werden wir sie verbrauchsabhängig
+              von der Kaution abziehen. Ablesung gemeinsam mit Ihnen bei der Schlüsselübergabe.
+            </p>
+            <p>
+              Ein zerbrochenes Glas oder ein Teller ist kein großes Problem, aber wer zwei Wochen lang kein Geschirr
+              spült oder den Router von der Terrasse wirft, könnte enttäuscht werden. Wahre Geschichten!
+            </p>
+          </article>
+
+          <article class="info-section" data-testid="section-checkout">
+            <h2>Check-out</h2>
+            <p>
+              Sie müssen vor der Abreise nicht extra putzen, aber Sie sollten die Unterkunft auch nicht so hinterlassen,
+              dass wir vier Stunden zusätzlich putzen müssen.
+            </p>
+            <p>
+              Wenn es zeitlich nicht passt, Ana beim Check-out zu treffen, <strong>lassen Sie einfach die Schlüssel
+              auf dem Tisch liegen</strong>. Vergessen Sie nur nichts anderes. Falls doch, wurde bisher alles
+              wiedergefunden. Nur die portugiesische Post braucht ihre Zeit.
+            </p>
+          </article>
+
+          <article class="info-section" data-testid="section-rauchen">
+            <h2>Rauchen</h2>
+            <p>
+              Rauchen ist ungesund. Daher sollten Sie das Rauchverbot positiv sehen. Bitte verzichten Sie auch auf
+              E-Zigaretten. <strong>Rauchen in Innenräumen führt zu einem Abzug von der Kaution</strong> wegen des
+              unangenehmen Geruchs, aber <strong>draußen rauchen ist kein Problem</strong>.
+            </p>
+            <p>
+              Zigaretten gibt es in fast jedem Geschäft, manche Bars haben Automaten. Und weil es etwa 20% günstiger
+              ist als in vielen anderen Ländern: Die Freimenge beträgt vier Stangen.
+            </p>
+          </article>
+
+          <article class="info-section" data-testid="section-sicherheit">
+            <h2>Sicherheit</h2>
+            <p>
+              Die Dachterrasse von Casa Eugenia dient als Stromquelle und als Abzug für die Küche des Restaurants
+              im Erdgeschoss. Es gibt kein Geländer, daher ein guter Grund, das Tor verschlossen zu halten.
+              Kein Spielplatz für Kinder. Das Gleiche gilt bei Casal Regina für den Zugang zum privaten Dachboden.
+            </p>
+            <p>
+              Weitere Themen sind Feuchtigkeit und Wind. Bitte lassen Sie Kissen nicht über Nacht draußen und holen
+              Sie Essen rein. Markisen einfahren und Fenster schließen, wenn Sie die Wohnung verlassen. Frische Wäsche
+              mit Wäscheklammern sichern.
+            </p>
+            <p>
+              Poolnutzung bei Casal Regina auf eigene Gefahr, bitte kein Glas verwenden. Plastikbecher und ähnliches
+              finden Sie im Schrank.
+            </p>
+          </article>
+
+          <aside class="info-sidebar">
+            <div class="sidebar-card">
+              <h3>Auf einen Blick</h3>
+              <ul class="checklist">
+                <li>Kaution: €150 bar bei Ankunft</li>
+                <li>Direktbuchung: Überweisung möglich</li>
+                <li>Rauchen nur draußen</li>
+                <li>Schlüssel bei Abreise auf dem Tisch</li>
+                <li>Ordentlich hinterlassen genügt</li>
+              </ul>
+            </div>
+            <div class="sidebar-card">
+              <h3>Kontakt</h3>
+              <p>Ana (vor Ort):</p>
+              <a href="tel:+351933398889" class="contact-link">+351 933 398 889</a>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="info-nav">
+      <div class="container">
+        <h3>Weitere Informationen</h3>
+        <div class="nav-links">
+          <a href="/info/ausstattung/" class="nav-link">Ausstattung</a>
+          <a href="/info/anreise/" class="nav-link">Anreise</a>
+          <a href="/info/haustiere/" class="nav-link">Haustiere</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .info-content {
+    padding: var(--space-12) 0;
+  }
+
+  .content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+  }
+
+  .info-section {
+    margin-bottom: var(--space-10);
+    padding-bottom: var(--space-10);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .info-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .info-section h2 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .info-section p {
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+  }
+
+  .info-sidebar {
+    position: sticky;
+    top: var(--space-6);
+    align-self: start;
+  }
+
+  .sidebar-card {
+    background: var(--color-background-alt);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+  }
+
+  .sidebar-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-4);
+    color: var(--color-primary);
+  }
+
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .checklist li {
+    padding: var(--space-2) 0;
+    padding-left: var(--space-6);
+    position: relative;
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+  }
+
+  .checklist li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: bold;
+  }
+
+  .contact-link {
+    display: block;
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: var(--color-primary);
+  }
+
+  .info-nav {
+    padding: var(--space-12) 0;
+    background: var(--color-background-alt);
+    text-align: center;
+  }
+
+  .info-nav h3 {
+    margin-bottom: var(--space-6);
+  }
+
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-background);
+    border-radius: var(--radius-base);
+    color: var(--color-text);
+    transition: all var(--transition-base);
+  }
+
+  .nav-link:hover {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  @media (max-width: 900px) {
+    .content-wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    .info-sidebar {
+      position: static;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-4);
+    }
+
+    .sidebar-card {
+      margin-bottom: 0;
+    }
+  }
+</style>

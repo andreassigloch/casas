@@ -1,0 +1,122 @@
+---
+/**
+ * Kontakt Page
+ * @author andreas@siglochconsulting.de
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { siteConfig } from '@lib/config';
+---
+
+<BaseLayout
+  title={`Kontakt - ${siteConfig.name}`}
+  description="Kontaktieren Sie uns - wir freuen uns auf Ihre Nachricht"
+>
+  <Header />
+
+  <main>
+    <PageHero
+      title="Kontakt"
+      subtitle="Wir freuen uns auf Ihre Nachricht!"
+      compact
+    />
+
+    <!-- Contact Section -->
+    <section class="contact-section" data-testid="contact-section">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Contact Info -->
+          <div class="contact-info" data-testid="contact-info">
+            <h2>Kontaktdaten</h2>
+
+            <div class="info-item">
+              <h3>Adresse</h3>
+              <p>
+                {siteConfig.contact.name}<br>
+                {siteConfig.contact.address.street}<br>
+                {siteConfig.contact.address.zip} {siteConfig.contact.address.city}
+              </p>
+            </div>
+
+            <div class="info-item">
+              <h3>E-Mail</h3>
+              <p>
+                <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>
+              </p>
+            </div>
+
+            {siteConfig.contact.phone && (
+              <div class="info-item">
+                <h3>Telefon</h3>
+                <p>
+                  <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, '')}`}>{siteConfig.contact.phone}</a>
+                </p>
+              </div>
+            )}
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form-wrapper" data-testid="contact-form-wrapper">
+            <ContactForm showHeader={false} />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .contact-section {
+    padding: var(--space-16) 0;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-12);
+    align-items: start;
+  }
+
+  .contact-info h2 {
+    font-size: var(--text-3xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-8);
+  }
+
+  .info-item {
+    margin-bottom: var(--space-6);
+  }
+
+  .info-item h3 {
+    font-size: var(--text-lg);
+    color: var(--color-text);
+    margin-bottom: var(--space-2);
+  }
+
+  .info-item p {
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .info-item a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .info-item a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+  }
+</style>

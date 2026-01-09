@@ -1,0 +1,277 @@
+---
+/**
+ * Version/Health Check Page
+ * @author andreas@siglochconsulting.de
+ *
+ * Minimal ops/debugging page - displays deployment info
+ * NOT FOR CUSTOMERS - clearly marked with warning
+ */
+
+// CRs implemented - static list for reference
+const implementedCRs: { number: string; title: string }[] = [
+  // Add CRs as they are completed
+];
+---
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>System Version - Sesimbrinha</title>
+  <style>
+    @import url('../styles/tokens.css');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-background);
+      color: var(--color-text);
+      padding: var(--space-8);
+      line-height: var(--leading-normal);
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .warning {
+      background: var(--color-warning-50);
+      color: var(--color-warning-700);
+      padding: var(--space-6);
+      border-radius: var(--radius-base);
+      border-left: 4px solid var(--color-warning-500);
+      margin-bottom: var(--space-8);
+      text-align: center;
+    }
+
+    .warning h1 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-bold);
+      margin-bottom: var(--space-2);
+    }
+
+    .warning p {
+      font-size: var(--text-lg);
+      font-weight: var(--font-semibold);
+    }
+
+    .home-link {
+      display: inline-block;
+      background: var(--color-primary);
+      color: var(--color-background);
+      padding: var(--space-4) var(--space-8);
+      border-radius: var(--radius-base);
+      text-decoration: none;
+      font-weight: var(--font-semibold);
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-8);
+      transition: background var(--transition-fast);
+    }
+
+    .home-link:hover {
+      background: var(--color-primary-700);
+    }
+
+    .version-info {
+      background: var(--color-background-alt);
+      padding: var(--space-6);
+      border-radius: var(--radius-base);
+      border: 1px solid var(--color-gray-200);
+    }
+
+    .version-info h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-semibold);
+      margin-bottom: var(--space-4);
+      color: var(--color-text-secondary);
+    }
+
+    .info-row {
+      display: flex;
+      gap: var(--space-4);
+      margin-bottom: var(--space-3);
+      font-size: var(--text-base);
+    }
+
+    .info-label {
+      font-weight: var(--font-semibold);
+      color: var(--color-text-light);
+      min-width: 80px;
+    }
+
+    .info-value {
+      color: var(--color-text);
+      font-family: var(--font-mono);
+    }
+
+    .json-link {
+      display: inline-block;
+      color: var(--color-primary);
+      text-decoration: none;
+      margin-top: var(--space-4);
+      font-size: var(--text-sm);
+    }
+
+    .json-link:hover {
+      text-decoration: underline;
+    }
+
+    .cr-section {
+      background: var(--color-background-alt);
+      padding: var(--space-6);
+      border-radius: var(--radius-base);
+      border: 1px solid var(--color-gray-200);
+      margin-top: var(--space-8);
+    }
+
+    .cr-section h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-semibold);
+      margin-bottom: var(--space-4);
+      color: var(--color-text-secondary);
+    }
+
+    .cr-list {
+      list-style: none;
+    }
+
+    .cr-item {
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-gray-200);
+      font-size: var(--text-sm);
+    }
+
+    .cr-item:last-child {
+      border-bottom: none;
+    }
+
+    .cr-number {
+      font-weight: var(--font-semibold);
+      color: var(--color-primary);
+      margin-right: var(--space-2);
+    }
+
+    .cr-title {
+      color: var(--color-text);
+    }
+
+    .no-crs {
+      color: var(--color-text-light);
+      font-style: italic;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: var(--space-4);
+      }
+
+      .warning h1 {
+        font-size: var(--text-xl);
+      }
+
+      .warning p {
+        font-size: var(--text-base);
+      }
+
+      .home-link {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Warning Banner -->
+    <div class="warning" data-testid="warning-banner">
+      <h1>⚠️ SYSTEMINFORMATION</h1>
+      <p>Nur für internen Gebrauch</p>
+    </div>
+
+    <!-- Home Link -->
+    <a href="/" class="home-link" data-testid="home-link">
+      ← Zurück zur Startseite
+    </a>
+
+    <!-- Version Information - loaded client-side from version.json -->
+    <div class="version-info" data-testid="version-info">
+      <h2>Deployment Information</h2>
+
+      <div class="info-row">
+        <span class="info-label">Commit:</span>
+        <span class="info-value" data-testid="commit-hash" id="commit-hash">Laden...</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">Build:</span>
+        <span class="info-value" data-testid="build-date" id="build-date">Laden...</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">Repo:</span>
+        <span class="info-value" data-testid="source-repo" id="source-repo">Laden...</span>
+      </div>
+
+      <a href="/version.json" class="json-link" data-testid="json-link">
+        → Raw JSON
+      </a>
+    </div>
+
+    <script>
+      fetch('/version.json')
+        .then(res => res.json())
+        .then(data => {
+          const commitEl = document.getElementById('commit-hash');
+          const repoEl = document.getElementById('source-repo');
+          const dateEl = document.getElementById('build-date');
+
+          if (commitEl) commitEl.textContent = data.commit;
+          if (repoEl) repoEl.textContent = data.source_repo.replace('https://github.com/', '');
+
+          if (dateEl) {
+            const date = new Date(data.date);
+            dateEl.textContent = date.toLocaleString('de-DE', {
+              year: 'numeric', month: '2-digit', day: '2-digit',
+              hour: '2-digit', minute: '2-digit',
+              timeZone: 'UTC', timeZoneName: 'short'
+            });
+          }
+        })
+        .catch(() => {
+          const commitEl = document.getElementById('commit-hash');
+          const repoEl = document.getElementById('source-repo');
+          const dateEl = document.getElementById('build-date');
+
+          if (commitEl) commitEl.textContent = 'Nicht verfügbar';
+          if (dateEl) dateEl.textContent = 'Nicht verfügbar';
+          if (repoEl) repoEl.textContent = 'Nicht verfügbar';
+        });
+    </script>
+
+    <!-- Implemented CRs -->
+    <div class="cr-section" data-testid="cr-section">
+      <h2>Umgesetzte Change Requests</h2>
+      {implementedCRs.length > 0 ? (
+        <ul class="cr-list">
+          {implementedCRs.map(cr => (
+            <li class="cr-item">
+              <span class="cr-number">CR-{cr.number}:</span>
+              <span class="cr-title">{cr.title}</span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="no-crs">Noch keine CRs dokumentiert</p>
+      )}
+    </div>
+  </div>
+</body>
+</html>

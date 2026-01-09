@@ -1,0 +1,22 @@
+{
+  "name": "sesimbrinha",
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev --port 4323",
+    "build": "astro build",
+    "preview": "astro preview",
+    "translate": "npx tsx scripts/translate.ts",
+    "translate:check": "npx tsx scripts/translate.ts --dry-run",
+    "compliance:bfsg": "npx tsx scripts/bfsg-agent.ts",
+    "compliance": "npx tsx scripts/compliance-check.ts"
+  },
+  "dependencies": {
+    "@fontsource/poppins": "^5.2.7",
+    "astro": "^5.0.0",
+    "deepl-node": "^1.14.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

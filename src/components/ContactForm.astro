@@ -1,0 +1,299 @@
+---
+/**
+ * ContactForm Component
+ * @author andreas@siglochconsulting.de
+ *
+ * Web3Forms integration for static hosting
+ * No backend needed - perfect for static sites
+ */
+
+import { siteConfig } from '@lib/config';
+
+interface Props {
+  showHeader?: boolean;
+  formId?: string;
+}
+
+const { showHeader = true, formId = 'contact-form' } = Astro.props;
+---
+
+<div class="contact-form-container">
+  {showHeader && <h2>Kontaktieren Sie uns!</h2>}
+
+  <p class="contact-intro">
+    Haben Sie Fragen? Kontaktieren Sie uns gerne per
+    {siteConfig.contact.phone && (
+      <><a href={`tel:${siteConfig.contact.phone.replace(/\s/g, '')}`}>Telefon</a>, </>
+    )}
+    <a href={`mailto:${siteConfig.contact.email}`}>E-Mail</a>,
+    oder nutzen Sie das Kontaktformular:
+  </p>
+
+  <form
+    class="contact-form"
+    id={formId}
+    action="https://api.web3forms.com/submit"
+    method="POST"
+    data-testid="contact-form"
+  >
+    <!-- Web3Forms Access Key (hidden) - Replace with your key -->
+    <input type="hidden" name="access_key" value="TODO_REPLACE_WITH_KEY">
+
+    <!-- Honeypot Spam Protection -->
+    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+    <!-- Form Fields -->
+    <div class="form-group">
+      <label for={`${formId}-name`}>Name *</label>
+      <input
+        type="text"
+        id={`${formId}-name`}
+        name="name"
+        required
+        aria-required="true"
+        autocomplete="name"
+        data-testid="input-name"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for={`${formId}-email`}>E-Mail *</label>
+      <input
+        type="email"
+        id={`${formId}-email`}
+        name="email"
+        required
+        aria-required="true"
+        autocomplete="email"
+        data-testid="input-email"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for={`${formId}-message`}>Nachricht *</label>
+      <textarea
+        id={`${formId}-message`}
+        name="message"
+        rows="6"
+        required
+        aria-required="true"
+        data-testid="input-message"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="checkbox-label">
+        <input
+          type="checkbox"
+          name="privacy"
+          required
+          data-testid="input-privacy"
+        />
+        <span>
+          Ich habe die <a href="/datenschutz">Datenschutzerklärung</a> gelesen und akzeptiert. *
+        </span>
+      </label>
+    </div>
+
+    <button type="submit" class="submit-button" data-testid="submit-button">
+      Nachricht senden
+    </button>
+
+    <div
+      class="form-message"
+      id={`${formId}-message-display`}
+      role="alert"
+      aria-live="assertive"
+      style="display: none;"
+    ></div>
+  </form>
+</div>
+
+<style>
+  .contact-form-container {
+    background: var(--color-background);
+    padding: var(--space-8);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-form-container h2 {
+    font-size: var(--text-3xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-6);
+    text-align: center;
+  }
+
+  .contact-intro {
+    text-align: center;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-8);
+  }
+
+  .contact-intro a {
+    color: var(--color-primary);
+    font-weight: var(--font-medium);
+  }
+
+  .form-group {
+    margin-bottom: var(--space-6);
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: var(--font-medium);
+    margin-bottom: var(--space-2);
+    color: var(--color-text);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: var(--space-3);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    font-family: var(--font-body);
+    background: var(--color-gray-100);
+    transition: all var(--transition-base);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background: var(--color-background);
+    box-shadow: 0 0 0 3px var(--color-primary-100);
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-weight: normal;
+    cursor: pointer;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin-top: var(--space-1);
+    flex-shrink: 0;
+  }
+
+  .checkbox-label a {
+    color: var(--color-primary);
+  }
+
+  .submit-button {
+    width: 100%;
+    padding: var(--space-4);
+    background: var(--color-primary);
+    color: var(--color-background);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: all var(--transition-base);
+  }
+
+  .submit-button:hover {
+    background: var(--color-primary-600);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .submit-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .form-message {
+    margin-top: var(--space-4);
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    text-align: center;
+    font-weight: var(--font-medium);
+  }
+
+  .form-message.success {
+    background: var(--color-success-50);
+    color: var(--color-success-700);
+    border: var(--border-width) solid var(--color-success-500);
+  }
+
+  .form-message.error {
+    background: var(--color-error-50);
+    color: var(--color-error-700);
+    border: var(--border-width) solid var(--color-error-500);
+  }
+
+  .form-message.info {
+    background: var(--color-info-50);
+    color: var(--color-info-700);
+    border: var(--border-width) solid var(--color-info-500);
+  }
+
+  @media (max-width: 768px) {
+    .contact-form-container {
+      padding: var(--space-6);
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const forms = document.querySelectorAll('.contact-form');
+
+    forms.forEach((form) => {
+      const formElement = form as HTMLFormElement;
+      const formId = formElement.id;
+      const messageDiv = document.getElementById(`${formId}-message-display`);
+      const submitButton = form.querySelector('[type="submit"]') as HTMLButtonElement;
+
+      formElement.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (!messageDiv || !submitButton) return;
+
+        // Show loading state
+        submitButton.disabled = true;
+        submitButton.textContent = 'Wird gesendet...';
+        messageDiv.style.display = 'block';
+        messageDiv.className = 'form-message info';
+        messageDiv.textContent = 'Nachricht wird gesendet...';
+
+        try {
+          const formData = new FormData(formElement);
+
+          const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData,
+          });
+
+          const result = await response.json();
+
+          if (response.ok && result.success) {
+            messageDiv.className = 'form-message success';
+            messageDiv.textContent = 'Vielen Dank! Ihre Nachricht wurde erfolgreich versendet.';
+            formElement.reset();
+          } else {
+            throw new Error(result.message || 'Fehler beim Senden der Nachricht');
+          }
+        } catch (error) {
+          messageDiv.className = 'form-message error';
+          messageDiv.textContent = error instanceof Error
+            ? error.message
+            : 'Fehler beim Senden der Nachricht. Bitte versuchen Sie es später erneut.';
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Nachricht senden';
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,326 @@
+---
+/**
+ * Haustiere Info Page
+ * @author andreas@siglochconsulting.de
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import { siteConfig } from '@lib/config';
+---
+
+<BaseLayout
+  title="Haustiere - Sesimbrinha"
+  description="Mit Hund nach Portugal: Einreisebestimmungen, Kosten und praktische Tipps für den Urlaub mit Haustier."
+>
+  <Header />
+
+  <main>
+    <PageHero
+      title="Haustiere"
+      subtitle="Ihr Vierbeiner ist bei uns willkommen"
+      compact
+    />
+
+    <section class="info-content">
+      <div class="container">
+        <div class="content-wrapper">
+
+          <article class="info-section" data-testid="section-allgemein">
+            <h2>Haustiere erlaubt</h2>
+            <p>
+              Haustiere sind erlaubt, aber leider müssen wir <strong>25 Euro pro Haustier pro Aufenthalt</strong>
+              berechnen. Wir sind nicht begeistert, wenn Schlammspuren im Bett gefunden werden.
+            </p>
+            <p>
+              Wenn Sie eine Hundedecke oder andere Ausstattung benötigen, sollten wir das ein paar Tage vorher wissen.
+            </p>
+          </article>
+
+          <article class="info-section" data-testid="section-einreise">
+            <h2>Einreise nach Portugal</h2>
+            <p>
+              Für die Einreise mit Haustieren in die EU benötigen Sie:
+            </p>
+            <ul class="requirement-list">
+              <li>EU-Heimtierausweis</li>
+              <li>Gültige Tollwutimpfung (mind. 21 Tage vor Einreise)</li>
+              <li>Mikrochip-Kennzeichnung</li>
+              <li>Tierarzt-Stempel im Ausweis</li>
+            </ul>
+            <p>
+              <strong>Empfohlen:</strong> Leishmaniose-Impfung, da die Krankheit in Portugal durch Sandmücken
+              übertragen werden kann.
+            </p>
+          </article>
+
+          <article class="info-section" data-testid="section-vorort">
+            <h2>Vor Ort mit Hund</h2>
+
+            <h3>Restaurants</h3>
+            <p>
+              Bitte seien Sie nicht enttäuscht, wenn Hunde in einem Restaurant nicht erlaubt sind. Bis vor
+              einigen Jahren war es sogar generell verboten. Viele Terrassen sind jedoch hundefreundlich.
+            </p>
+
+            <h3>Strand</h3>
+            <p>
+              Für den Strand gilt: <strong>im Winter OK</strong>, in der Badesaison an vielen Stränden nicht.
+              Bitte beachten Sie die Hinweise an den Strand-Zugängen. Es gibt jedoch auch hundefreundliche
+              Strandabschnitte.
+            </p>
+
+            <h3>Landleben (Casal Regina)</h3>
+            <p>
+              Hunde können abends bellen, und Hähne können morgens krähen – das gehört zum Landleben dazu.
+              Der Zaun ist möglicherweise nicht mehr vollständig. Entscheiden Sie bitte selbst, ob er
+              ausreichenden Schutz für Ihre Haustiere bietet.
+            </p>
+          </article>
+
+          <aside class="info-sidebar">
+            <div class="sidebar-card highlight">
+              <h3>Kosten</h3>
+              <p class="price">€25</p>
+              <p class="price-info">pro Haustier, pro Aufenthalt</p>
+            </div>
+            <div class="sidebar-card">
+              <h3>Checkliste Einreise</h3>
+              <ul class="checklist">
+                <li>EU-Heimtierausweis</li>
+                <li>Tollwutimpfung (21+ Tage)</li>
+                <li>Mikrochip</li>
+                <li>Tierarzt-Stempel</li>
+              </ul>
+            </div>
+            <div class="sidebar-card">
+              <h3>Empfohlen</h3>
+              <ul class="recommendation-list">
+                <li>Leishmaniose-Impfung</li>
+                <li>Zeckenschutz</li>
+                <li>Hundedecke (vorhanden)</li>
+              </ul>
+            </div>
+            <div class="sidebar-card">
+              <h3>Strand mit Hund</h3>
+              <p class="season-info">
+                <span class="allowed">Winter: ✓ erlaubt</span>
+                <span class="restricted">Sommer: eingeschränkt</span>
+              </p>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="info-nav">
+      <div class="container">
+        <h3>Weitere Informationen</h3>
+        <div class="nav-links">
+          <a href="/info/hausordnung/" class="nav-link">Hausordnung</a>
+          <a href="/info/ausstattung/" class="nav-link">Ausstattung</a>
+          <a href="/info/anreise/" class="nav-link">Anreise</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .info-content {
+    padding: var(--space-12) 0;
+  }
+
+  .content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+  }
+
+  .info-section {
+    margin-bottom: var(--space-10);
+    padding-bottom: var(--space-10);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .info-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .info-section h2 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .info-section h3 {
+    font-size: var(--text-lg);
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-3);
+    color: var(--color-text);
+  }
+
+  .info-section p {
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+  }
+
+  .requirement-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-4) 0;
+  }
+
+  .requirement-list li {
+    padding: var(--space-2) 0 var(--space-2) var(--space-6);
+    position: relative;
+    color: var(--color-text-secondary);
+  }
+
+  .requirement-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: bold;
+  }
+
+  .info-sidebar {
+    position: sticky;
+    top: var(--space-6);
+    align-self: start;
+  }
+
+  .sidebar-card {
+    background: var(--color-background-alt);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+  }
+
+  .sidebar-card.highlight {
+    background: var(--color-primary);
+    color: white;
+    text-align: center;
+  }
+
+  .sidebar-card.highlight h3 {
+    color: white;
+  }
+
+  .price {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    margin: var(--space-2) 0;
+  }
+
+  .price-info {
+    font-size: var(--text-sm);
+    opacity: 0.9;
+    margin: 0;
+  }
+
+  .sidebar-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-4);
+    color: var(--color-primary);
+  }
+
+  .checklist, .recommendation-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .checklist li, .recommendation-list li {
+    padding: var(--space-2) 0;
+    padding-left: var(--space-6);
+    position: relative;
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+  }
+
+  .checklist li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: bold;
+  }
+
+  .recommendation-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+  }
+
+  .season-info {
+    margin: 0;
+  }
+
+  .season-info span {
+    display: block;
+    padding: var(--space-2) 0;
+    font-size: var(--text-sm);
+  }
+
+  .allowed {
+    color: var(--color-success, #16a34a);
+  }
+
+  .restricted {
+    color: var(--color-warning, #ca8a04);
+  }
+
+  .info-nav {
+    padding: var(--space-12) 0;
+    background: var(--color-background-alt);
+    text-align: center;
+  }
+
+  .info-nav h3 {
+    margin-bottom: var(--space-6);
+  }
+
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-background);
+    border-radius: var(--radius-base);
+    color: var(--color-text);
+    transition: all var(--transition-base);
+  }
+
+  .nav-link:hover {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  @media (max-width: 900px) {
+    .content-wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    .info-sidebar {
+      position: static;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-4);
+    }
+
+    .sidebar-card {
+      margin-bottom: 0;
+    }
+  }
+</style>

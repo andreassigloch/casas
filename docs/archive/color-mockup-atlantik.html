@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesimbrinha Casas - Farbkonzept Mockup "Atlantik"</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /**
+     * Sesimbrinha Casas - "Atlantik" Color Scheme
+     * Theme: Ocean / Meer - Blau bis Türkis mit kräftigen Kontrasten
+     * @author andreas@siglochconsulting.de
+     */
+
+    :root {
+      /* ===== PRIMARY: Deep Ocean Blue ===== */
+      --color-primary: #0077B6;
+      --color-primary-50: #E6F4FA;
+      --color-primary-100: #CAE9F5;
+      --color-primary-200: #90D4ED;
+      --color-primary-300: #48B8E0;
+      --color-primary-400: #0096D1;
+      --color-primary-500: #0077B6;
+      --color-primary-600: #005F92;
+      --color-primary-700: #00486E;
+      --color-primary-800: #003450;
+      --color-primary-900: #001F30;
+
+      /* ===== SECONDARY: Turquoise/Teal ===== */
+      --color-secondary: #00B4D8;
+      --color-secondary-50: #E6F9FC;
+      --color-secondary-100: #B8F0F7;
+      --color-secondary-200: #7AE6F2;
+      --color-secondary-300: #3DD9EC;
+      --color-secondary-400: #00CCE5;
+      --color-secondary-500: #00B4D8;
+      --color-secondary-600: #0090AD;
+      --color-secondary-700: #006D82;
+      --color-secondary-800: #004A58;
+      --color-secondary-900: #00272E;
+
+      /* ===== ACCENT: Coral/Sunset (Kontrast) ===== */
+      --color-accent: #FF6B35;
+      --color-accent-50: #FFF0EB;
+      --color-accent-100: #FFD9CC;
+      --color-accent-200: #FFB399;
+      --color-accent-300: #FF8D66;
+      --color-accent-400: #FF7C4D;
+      --color-accent-500: #FF6B35;
+      --color-accent-600: #E55A2B;
+      --color-accent-700: #CC4A22;
+      --color-accent-800: #993718;
+      --color-accent-900: #66250F;
+
+      /* ===== ACCENT ALT: Golden Sand ===== */
+      --color-sand: #F4A261;
+      --color-sand-50: #FEF6ED;
+      --color-sand-100: #FDEBD4;
+      --color-sand-200: #FAD7A9;
+      --color-sand-300: #F7C07E;
+      --color-sand-400: #F5B16F;
+      --color-sand-500: #F4A261;
+      --color-sand-600: #E08B42;
+      --color-sand-700: #C47430;
+      --color-sand-800: #935722;
+      --color-sand-900: #623A17;
+
+      /* ===== NEUTRALS ===== */
+      --color-text: #1A1A2E;
+      --color-text-secondary: #4A5568;
+      --color-text-light: #718096;
+      --color-text-on-dark: #F7FAFC;
+
+      --color-background: #FFFFFF;
+      --color-background-alt: #F7FAFA;
+      --color-background-dark: #1A1A2E;
+
+      --color-border: #E2E8F0;
+      --color-border-light: #EDF2F7;
+
+      /* ===== TYPOGRAPHY ===== */
+      --font-heading: 'Poppins', -apple-system, sans-serif;
+      --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.25rem;
+      --text-2xl: 1.5rem;
+      --text-3xl: 1.75rem;
+      --text-4xl: 2.25rem;
+      --text-5xl: 3rem;
+
+      /* ===== SPACING ===== */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+
+      /* ===== MISC ===== */
+      --radius-sm: 0.25rem;
+      --radius-base: 0.5rem;
+      --radius-lg: 1rem;
+      --radius-pill: 9999px;
+      --shadow-lg: 0 10px 25px rgba(0, 119, 182, 0.15);
+      --shadow-xl: 0 20px 40px rgba(0, 119, 182, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      line-height: 1.6;
+      background: var(--color-background);
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-heading);
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 var(--space-6);
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: linear-gradient(135deg, var(--color-primary-800) 0%, var(--color-primary-600) 100%);
+      color: var(--color-text-on-dark);
+      padding: var(--space-4) 0;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-heading);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--color-secondary-300);
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 24px;
+      margin-right: var(--space-2);
+      vertical-align: middle;
+      color: var(--color-secondary-300);
+    }
+
+    .nav {
+      display: flex;
+      gap: var(--space-6);
+    }
+
+    .nav a {
+      color: var(--color-primary-100);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav a:hover {
+      color: white;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-secondary-500) 50%, var(--color-secondary-400) 100%);
+      color: white;
+      padding: var(--space-16) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,138.7C672,128,768,160,864,181.3C960,203,1056,213,1152,197.3C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom;
+      background-size: cover;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: var(--text-5xl);
+      margin-bottom: var(--space-6);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .hero p {
+      font-size: var(--text-xl);
+      opacity: 0.95;
+      margin-bottom: var(--space-8);
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-block;
+      padding: var(--space-4) var(--space-8);
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: var(--text-base);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-700);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-secondary {
+      background: var(--color-secondary);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-secondary-600);
+    }
+
+    .btn-accent {
+      background: var(--color-accent);
+      color: white;
+    }
+
+    .btn-accent:hover {
+      background: var(--color-accent-600);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+    }
+
+    .btn-outline:hover {
+      background: white;
+      color: var(--color-primary);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ===== CARDS SECTION ===== */
+    .section {
+      padding: var(--space-16) 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: var(--text-4xl);
+      color: var(--color-primary-700);
+      margin-bottom: var(--space-12);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--space-8);
+    }
+
+    .card {
+      background: white;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .card-image {
+      height: 220px;
+      background: linear-gradient(135deg, var(--color-secondary-400), var(--color-primary-500));
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .card-badge {
+      position: absolute;
+      top: var(--space-4);
+      right: var(--space-4);
+      background: var(--color-accent);
+      color: white;
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-pill);
+      font-size: var(--text-sm);
+      font-weight: 600;
+    }
+
+    .card-content {
+      padding: var(--space-6);
+    }
+
+    .card-title {
+      font-size: var(--text-xl);
+      color: var(--color-primary-700);
+      margin-bottom: var(--space-2);
+    }
+
+    .card-subtitle {
+      color: var(--color-text-light);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-4);
+    }
+
+    .card-features {
+      display: flex;
+      gap: var(--space-4);
+      margin-bottom: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .card-feature {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .card-feature svg {
+      width: 16px;
+      height: 16px;
+      color: var(--color-secondary);
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .card-price {
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .card-price span {
+      font-size: var(--text-sm);
+      font-weight: 400;
+      color: var(--color-text-light);
+    }
+
+    /* ===== FEATURE TAGS ===== */
+    .tags {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: var(--color-secondary-50);
+      color: var(--color-secondary-700);
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-pill);
+      font-size: var(--text-xs);
+      font-weight: 500;
+    }
+
+    .tag-accent {
+      background: var(--color-accent-50);
+      color: var(--color-accent-700);
+    }
+
+    .tag-sand {
+      background: var(--color-sand-50);
+      color: var(--color-sand-700);
+    }
+
+    /* ===== INFO SECTION ===== */
+    .info-section {
+      background: var(--color-background-alt);
+      padding: var(--space-16) 0;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-6);
+    }
+
+    .info-card {
+      background: white;
+      padding: var(--space-6);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      border-left: 4px solid var(--color-secondary);
+    }
+
+    .info-card-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-4);
+    }
+
+    .info-card h3 {
+      color: var(--color-primary-700);
+      margin-bottom: var(--space-2);
+    }
+
+    .info-card p {
+      color: var(--color-text-secondary);
+      font-size: var(--text-sm);
+    }
+
+    /* ===== CTA BANNER ===== */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--color-accent-500) 0%, var(--color-sand-500) 100%);
+      color: white;
+      padding: var(--space-12) 0;
+      text-align: center;
+    }
+
+    .cta-banner h2 {
+      font-size: var(--text-3xl);
+      margin-bottom: var(--space-4);
+    }
+
+    .cta-banner p {
+      margin-bottom: var(--space-6);
+      opacity: 0.95;
+    }
+
+    /* ===== COLOR PALETTE SHOWCASE ===== */
+    .palette-section {
+      padding: var(--space-16) 0;
+      background: var(--color-background-alt);
+    }
+
+    .palette-title {
+      font-size: var(--text-2xl);
+      color: var(--color-primary-700);
+      margin-bottom: var(--space-8);
+      text-align: center;
+    }
+
+    .palette-row {
+      margin-bottom: var(--space-8);
+    }
+
+    .palette-label {
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+      color: var(--color-text-secondary);
+    }
+
+    .palette-colors {
+      display: flex;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .palette-swatch {
+      flex: 1;
+      height: 80px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: var(--space-2);
+      font-size: var(--text-xs);
+      font-weight: 500;
+    }
+
+    /* Primary Blues */
+    .swatch-p50 { background: var(--color-primary-50); color: var(--color-primary-700); }
+    .swatch-p100 { background: var(--color-primary-100); color: var(--color-primary-700); }
+    .swatch-p200 { background: var(--color-primary-200); color: var(--color-primary-700); }
+    .swatch-p300 { background: var(--color-primary-300); color: var(--color-primary-800); }
+    .swatch-p400 { background: var(--color-primary-400); color: white; }
+    .swatch-p500 { background: var(--color-primary-500); color: white; }
+    .swatch-p600 { background: var(--color-primary-600); color: white; }
+    .swatch-p700 { background: var(--color-primary-700); color: white; }
+    .swatch-p800 { background: var(--color-primary-800); color: white; }
+    .swatch-p900 { background: var(--color-primary-900); color: white; }
+
+    /* Secondary Turquoise */
+    .swatch-s50 { background: var(--color-secondary-50); color: var(--color-secondary-700); }
+    .swatch-s100 { background: var(--color-secondary-100); color: var(--color-secondary-700); }
+    .swatch-s200 { background: var(--color-secondary-200); color: var(--color-secondary-700); }
+    .swatch-s300 { background: var(--color-secondary-300); color: var(--color-secondary-800); }
+    .swatch-s400 { background: var(--color-secondary-400); color: white; }
+    .swatch-s500 { background: var(--color-secondary-500); color: white; }
+    .swatch-s600 { background: var(--color-secondary-600); color: white; }
+    .swatch-s700 { background: var(--color-secondary-700); color: white; }
+    .swatch-s800 { background: var(--color-secondary-800); color: white; }
+    .swatch-s900 { background: var(--color-secondary-900); color: white; }
+
+    /* Accent Coral */
+    .swatch-a50 { background: var(--color-accent-50); color: var(--color-accent-700); }
+    .swatch-a100 { background: var(--color-accent-100); color: var(--color-accent-700); }
+    .swatch-a200 { background: var(--color-accent-200); color: var(--color-accent-700); }
+    .swatch-a300 { background: var(--color-accent-300); color: var(--color-accent-800); }
+    .swatch-a400 { background: var(--color-accent-400); color: white; }
+    .swatch-a500 { background: var(--color-accent-500); color: white; }
+    .swatch-a600 { background: var(--color-accent-600); color: white; }
+    .swatch-a700 { background: var(--color-accent-700); color: white; }
+    .swatch-a800 { background: var(--color-accent-800); color: white; }
+    .swatch-a900 { background: var(--color-accent-900); color: white; }
+
+    /* Sand Gold */
+    .swatch-g50 { background: var(--color-sand-50); color: var(--color-sand-700); }
+    .swatch-g100 { background: var(--color-sand-100); color: var(--color-sand-700); }
+    .swatch-g200 { background: var(--color-sand-200); color: var(--color-sand-700); }
+    .swatch-g300 { background: var(--color-sand-300); color: var(--color-sand-800); }
+    .swatch-g400 { background: var(--color-sand-400); color: white; }
+    .swatch-g500 { background: var(--color-sand-500); color: white; }
+    .swatch-g600 { background: var(--color-sand-600); color: white; }
+    .swatch-g700 { background: var(--color-sand-700); color: white; }
+    .swatch-g800 { background: var(--color-sand-800); color: white; }
+    .swatch-g900 { background: var(--color-sand-900); color: white; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--color-primary-900);
+      color: var(--color-primary-100);
+      padding: var(--space-12) 0 var(--space-6);
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-8);
+      margin-bottom: var(--space-8);
+    }
+
+    .footer h4 {
+      color: white;
+      margin-bottom: var(--space-4);
+    }
+
+    .footer a {
+      color: var(--color-primary-200);
+      text-decoration: none;
+      display: block;
+      margin-bottom: var(--space-2);
+    }
+
+    .footer a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--color-primary-800);
+      font-size: var(--text-sm);
+      color: var(--color-primary-300);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: var(--text-3xl);
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .palette-swatch {
+        height: 60px;
+        font-size: 0.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-content">
+      <a href="/" class="logo">
+        <!-- Sardine Logo - Line Art -->
+        <svg class="logo-icon" viewBox="0 0 64 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Flipped horizontally: Sardine swimming right -->
+          <g transform="translate(64,0) scale(-1,1)">
+            <!-- Body -->
+            <path d="M4 16 C4 10, 12 6, 28 6 C44 6, 54 10, 58 16 C54 22, 44 26, 28 26 C12 26, 4 22, 4 16 Z"/>
+            <!-- Tail fin -->
+            <path d="M58 16 L64 8 L62 16 L64 24 L58 16"/>
+            <!-- Dorsal fin -->
+            <path d="M24 6 Q28 2, 32 6"/>
+            <!-- Ventral fin -->
+            <path d="M30 26 Q32 29, 36 26"/>
+            <!-- Gill line -->
+            <path d="M14 10 Q12 16, 14 22"/>
+            <!-- Eye -->
+            <circle cx="10" cy="15" r="2" fill="currentColor" stroke="none"/>
+            <!-- Scale pattern lines -->
+            <path d="M20 10 Q24 16, 20 22" opacity="0.5"/>
+            <path d="M30 8 Q34 16, 30 24" opacity="0.5"/>
+            <path d="M40 9 Q44 16, 40 23" opacity="0.5"/>
+            <path d="M50 11 Q53 16, 50 21" opacity="0.5"/>
+          </g>
+        </svg>
+        Sesimbrinha <span>Casas</span>
+      </a>
+      <nav class="nav">
+        <a href="#">Unterkünfte</a>
+        <a href="#">Über uns</a>
+        <a href="#">Sesimbra</a>
+        <a href="#">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-content">
+      <h1>Urlaub am Atlantik</h1>
+      <p>Traumhafte Ferienhäuser & Apartments direkt an der portugiesischen Küste. Erleben Sie Sesimbra mit Meerblick, Pool und authentischem Charme.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-accent">Unterkünfte entdecken</a>
+        <a href="#" class="btn btn-outline">Mehr erfahren</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cards Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Unsere Unterkünfte</h2>
+      <div class="cards-grid">
+        <!-- Card 1 -->
+        <article class="card">
+          <div class="card-image">
+            <span class="card-badge">Neu</span>
+            🏠
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Casa Vista Mar</h3>
+            <p class="card-subtitle">Sesimbra • Meerblick</p>
+            <div class="tags">
+              <span class="tag">Pool</span>
+              <span class="tag">Meerblick</span>
+              <span class="tag-accent tag">Klimaanlage</span>
+            </div>
+            <div class="card-features">
+              <span class="card-feature">👥 6 Gäste</span>
+              <span class="card-feature">🛏️ 3 Schlafzimmer</span>
+              <span class="card-feature">🚿 2 Bäder</span>
+            </div>
+            <div class="card-footer">
+              <span class="card-price">ab 150€ <span>/Nacht</span></span>
+              <a href="#" class="btn btn-primary" style="padding: var(--space-2) var(--space-4); font-size: var(--text-sm);">Details</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card">
+          <div class="card-image" style="background: linear-gradient(135deg, var(--color-primary-400), var(--color-secondary-600));">
+            🏡
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Villa Atlantico</h3>
+            <p class="card-subtitle">Sesimbra • Panoramablick</p>
+            <div class="tags">
+              <span class="tag">Pool</span>
+              <span class="tag">Garten</span>
+              <span class="tag-sand tag">Parkplatz</span>
+            </div>
+            <div class="card-features">
+              <span class="card-feature">👥 8 Gäste</span>
+              <span class="card-feature">🛏️ 4 Schlafzimmer</span>
+              <span class="card-feature">🚿 3 Bäder</span>
+            </div>
+            <div class="card-footer">
+              <span class="card-price">ab 220€ <span>/Nacht</span></span>
+              <a href="#" class="btn btn-secondary" style="padding: var(--space-2) var(--space-4); font-size: var(--text-sm);">Details</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card">
+          <div class="card-image" style="background: linear-gradient(135deg, var(--color-secondary-500), var(--color-secondary-300));">
+            🌊
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Apartamento Praia</h3>
+            <p class="card-subtitle">Sesimbra • Strandnähe</p>
+            <div class="tags">
+              <span class="tag">WiFi</span>
+              <span class="tag">Terrasse</span>
+              <span class="tag-accent tag">Strandnah</span>
+            </div>
+            <div class="card-features">
+              <span class="card-feature">👥 4 Gäste</span>
+              <span class="card-feature">🛏️ 2 Schlafzimmer</span>
+              <span class="card-feature">🚿 1 Bad</span>
+            </div>
+            <div class="card-footer">
+              <span class="card-price">ab 95€ <span>/Nacht</span></span>
+              <a href="#" class="btn btn-primary" style="padding: var(--space-2) var(--space-4); font-size: var(--text-sm);">Details</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Section -->
+  <section class="info-section">
+    <div class="container">
+      <h2 class="section-title">Warum Sesimbra?</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-card-icon">🏖️</div>
+          <h3>Traumhafte Strände</h3>
+          <p>Kristallklares Wasser und goldener Sand erwarten Sie an den schönsten Stränden Portugals.</p>
+        </div>
+        <div class="info-card" style="border-left-color: var(--color-accent);">
+          <div class="info-card-icon">🍷</div>
+          <h3>Kulinarik & Wein</h3>
+          <p>Frischer Fisch, lokale Weine und authentische portugiesische Küche.</p>
+        </div>
+        <div class="info-card" style="border-left-color: var(--color-sand);">
+          <div class="info-card-icon">🥾</div>
+          <h3>Natur & Wandern</h3>
+          <p>Der Arrábida Naturpark bietet spektakuläre Wanderwege mit Meerblick.</p>
+        </div>
+        <div class="info-card" style="border-left-color: var(--color-primary);">
+          <div class="info-card-icon">🚗</div>
+          <h3>Perfekte Lage</h3>
+          <p>Nur 40 Minuten von Lissabon – ideal für Tagesausflüge in die Hauptstadt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Bereit für Ihren Traumurlaub?</h2>
+      <p>Kontaktieren Sie uns für persönliche Beratung und die besten Angebote.</p>
+      <a href="#" class="btn btn-outline" style="border-color: white;">Jetzt anfragen</a>
+    </div>
+  </section>
+
+  <!-- Color Palette Section -->
+  <section class="palette-section">
+    <div class="container">
+      <h2 class="palette-title">Farbpalette "Atlantik"</h2>
+
+      <div class="palette-row">
+        <div class="palette-label">Primary: Deep Ocean Blue (#0077B6)</div>
+        <div class="palette-colors">
+          <div class="palette-swatch swatch-p50">50</div>
+          <div class="palette-swatch swatch-p100">100</div>
+          <div class="palette-swatch swatch-p200">200</div>
+          <div class="palette-swatch swatch-p300">300</div>
+          <div class="palette-swatch swatch-p400">400</div>
+          <div class="palette-swatch swatch-p500">500</div>
+          <div class="palette-swatch swatch-p600">600</div>
+          <div class="palette-swatch swatch-p700">700</div>
+          <div class="palette-swatch swatch-p800">800</div>
+          <div class="palette-swatch swatch-p900">900</div>
+        </div>
+      </div>
+
+      <div class="palette-row">
+        <div class="palette-label">Secondary: Turquoise (#00B4D8)</div>
+        <div class="palette-colors">
+          <div class="palette-swatch swatch-s50">50</div>
+          <div class="palette-swatch swatch-s100">100</div>
+          <div class="palette-swatch swatch-s200">200</div>
+          <div class="palette-swatch swatch-s300">300</div>
+          <div class="palette-swatch swatch-s400">400</div>
+          <div class="palette-swatch swatch-s500">500</div>
+          <div class="palette-swatch swatch-s600">600</div>
+          <div class="palette-swatch swatch-s700">700</div>
+          <div class="palette-swatch swatch-s800">800</div>
+          <div class="palette-swatch swatch-s900">900</div>
+        </div>
+      </div>
+
+      <div class="palette-row">
+        <div class="palette-label">Accent: Coral Sunset (#FF6B35)</div>
+        <div class="palette-colors">
+          <div class="palette-swatch swatch-a50">50</div>
+          <div class="palette-swatch swatch-a100">100</div>
+          <div class="palette-swatch swatch-a200">200</div>
+          <div class="palette-swatch swatch-a300">300</div>
+          <div class="palette-swatch swatch-a400">400</div>
+          <div class="palette-swatch swatch-a500">500</div>
+          <div class="palette-swatch swatch-a600">600</div>
+          <div class="palette-swatch swatch-a700">700</div>
+          <div class="palette-swatch swatch-a800">800</div>
+          <div class="palette-swatch swatch-a900">900</div>
+        </div>
+      </div>
+
+      <div class="palette-row">
+        <div class="palette-label">Accent Alt: Golden Sand (#F4A261)</div>
+        <div class="palette-colors">
+          <div class="palette-swatch swatch-g50">50</div>
+          <div class="palette-swatch swatch-g100">100</div>
+          <div class="palette-swatch swatch-g200">200</div>
+          <div class="palette-swatch swatch-g300">300</div>
+          <div class="palette-swatch swatch-g400">400</div>
+          <div class="palette-swatch swatch-g500">500</div>
+          <div class="palette-swatch swatch-g600">600</div>
+          <div class="palette-swatch swatch-g700">700</div>
+          <div class="palette-swatch swatch-g800">800</div>
+          <div class="palette-swatch swatch-g900">900</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <h4>Sesimbrinha Casas</h4>
+          <p style="margin-bottom: var(--space-4);">Traumhafte Ferienwohnungen an der portugiesischen Atlantikküste.</p>
+        </div>
+        <div>
+          <h4>Unterkünfte</h4>
+          <a href="#">Casa Vista Mar</a>
+          <a href="#">Villa Atlantico</a>
+          <a href="#">Apartamento Praia</a>
+        </div>
+        <div>
+          <h4>Information</h4>
+          <a href="#">Über Sesimbra</a>
+          <a href="#">Anreise</a>
+          <a href="#">Hausordnung</a>
+        </div>
+        <div>
+          <h4>Kontakt</h4>
+          <a href="#">info@sesimbrinha.de</a>
+          <a href="#">+49 xxx xxxxxxx</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Sesimbrinha Casas. Alle Rechte vorbehalten.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

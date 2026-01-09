@@ -1,0 +1,249 @@
+---
+/**
+ * Apartments Overview
+ * @author andreas@siglochconsulting.de
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import { siteConfig, apartments } from '@lib/config';
+
+const featureLabels: Record<string, string> = {
+  'pool': 'Pool',
+  'bbq': 'BBQ/Grill',
+  'garden': 'Garten',
+  'parking': 'Parkplatz',
+  'wheelchair-accessible': 'Barrierefrei',
+  'terrace': 'Terrasse',
+  'sea-view': 'Meerblick',
+  'separate-unit': 'Separater Bereich',
+  'panorama-view': 'Panoramablick',
+  'glass-front': 'Glasfront',
+};
+---
+
+<BaseLayout
+  title="Apartments - Sesimbrinha"
+  description="Drei einzigartige Ferienwohnungen in Sesimbra: Landhaus mit Pool oder Strandpromenade mit Meerblick."
+>
+  <Header />
+
+  <main>
+    <PageHero
+      title="Unsere Ferienwohnungen"
+      subtitle="Wählen Sie Ihr Zuhause für den perfekten Portugal-Urlaub"
+    />
+
+    <section class="apartments-list">
+      <div class="container">
+        {apartments.map((apt, index) => (
+          <article class={`apartment-detail ${index % 2 === 1 ? 'reverse' : ''}`} data-testid={`apartment-detail-${apt.id}`}>
+            <div class="apartment-image">
+              {apt.images && apt.images.length > 0 && (
+                <img src={apt.images[0].src} alt={apt.images[0].alt} loading="lazy" />
+              )}
+              <div class="apartment-badge">{apt.type === 'house' ? 'Landhaus' : 'Apartment'}</div>
+            </div>
+            <div class="apartment-info">
+              <h2>{apt.name}</h2>
+              <p class="location">{apt.location}</p>
+              <p class="highlight">{apt.highlight.de}</p>
+
+              <div class="specs">
+                <div class="spec">
+                  <span class="spec-value">{apt.guests}</span>
+                  <span class="spec-label">Gäste</span>
+                </div>
+                <div class="spec">
+                  <span class="spec-value">{apt.bedrooms}</span>
+                  <span class="spec-label">Schlafzimmer</span>
+                </div>
+                <div class="spec">
+                  <span class="spec-value">{apt.bathrooms}</span>
+                  <span class="spec-label">Bäder</span>
+                </div>
+                <div class="spec">
+                  <span class="spec-value">{apt.size.indoor}m²</span>
+                  <span class="spec-label">Wohnfläche</span>
+                </div>
+              </div>
+
+              <ul class="features">
+                {apt.features.map((f) => (
+                  <li>{featureLabels[f] || f}</li>
+                ))}
+              </ul>
+
+              <a href={`/apartments/${apt.slug.de}/`} class="button button-primary">
+                Details & Bilder →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .apartments-list {
+    padding: var(--space-16) 0;
+  }
+
+  .apartment-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    margin-bottom: var(--space-16);
+    padding-bottom: var(--space-16);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .apartment-detail:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .apartment-detail.reverse {
+    direction: rtl;
+  }
+
+  .apartment-detail.reverse > * {
+    direction: ltr;
+  }
+
+  .apartment-image {
+    position: relative;
+    min-height: 400px;
+    background: linear-gradient(135deg, var(--color-primary-100), var(--color-primary-200));
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .apartment-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+    transition: transform var(--transition-slow);
+  }
+
+  .apartment-detail:hover .apartment-image img {
+    transform: scale(1.05);
+  }
+
+  .apartment-badge {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    background: var(--color-primary);
+    color: white;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-pill);
+    font-weight: var(--font-semibold);
+  }
+
+  .apartment-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .apartment-info h2 {
+    font-size: var(--text-3xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .location {
+    color: var(--color-text-light);
+    margin-bottom: var(--space-4);
+  }
+
+  .highlight {
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
+  }
+
+  .specs {
+    display: flex;
+    gap: var(--space-6);
+    margin-bottom: var(--space-6);
+  }
+
+  .spec {
+    text-align: center;
+  }
+
+  .spec-value {
+    display: block;
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--color-primary);
+  }
+
+  .spec-label {
+    font-size: var(--text-sm);
+    color: var(--color-text-light);
+  }
+
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-8) 0;
+  }
+
+  .features li {
+    background: var(--color-primary-50);
+    color: var(--color-primary-700);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-pill);
+    font-size: var(--text-sm);
+  }
+
+  .button {
+    display: inline-block;
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-primary);
+    color: white;
+    border-radius: var(--radius-base);
+    text-decoration: none;
+    font-weight: var(--font-semibold);
+    transition: all var(--transition-base);
+    align-self: flex-start;
+  }
+
+  .button:hover {
+    background: var(--color-primary-700);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 900px) {
+    .apartment-detail {
+      grid-template-columns: 1fr;
+    }
+
+    .apartment-detail.reverse {
+      direction: ltr;
+    }
+
+    .apartment-image {
+      min-height: 250px;
+    }
+
+    .specs {
+      flex-wrap: wrap;
+    }
+  }
+</style>

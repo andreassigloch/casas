@@ -1,0 +1,128 @@
+{
+  "meta": {
+    "title": "Sesimbrinha - Ferienwohnungen in Sesimbra, Portugal",
+    "description": "Drei einzigartige Ferienwohnungen in Sesimbra - vom renovierten Bauernhaus mit Pool bis zur Strandpromenade mit Meerblick."
+  },
+  "nav": {
+    "home": "Home",
+    "apartments": "Apartments",
+    "info": "Infos",
+    "contact": "Kontakt"
+  },
+  "home": {
+    "hero": {
+      "title": "Urlaub in Sesimbra",
+      "subtitle": "Drei einzigartige Ferienwohnungen an Portugals schönster Küste"
+    },
+    "apartments": {
+      "title": "Unsere Apartments",
+      "cta": "Alle Apartments ansehen"
+    },
+    "about": {
+      "title": "Über uns",
+      "text": "Familiengeführte Ferienwohnungen mit persönlicher Betreuung vor Ort."
+    }
+  },
+  "apartments": {
+    "title": "Unsere Ferienwohnungen",
+    "guests": "Gäste",
+    "bedrooms": "Schlafzimmer",
+    "bathrooms": "Bäder",
+    "size": "Wohnfläche",
+    "outdoor": "Außenbereich",
+    "features": "Ausstattung",
+    "location": "Lage",
+    "book": "Anfrage senden",
+    "backToOverview": "Zurück zur Übersicht",
+    "highlights": {
+      "casal-regina": "Renoviertes Bauernhaus der Urgroßmutter mit Pool und 5000m² Garten",
+      "teresa": "Großzügige Dachterrasse mit BBQ direkt an der Strandpromenade",
+      "marceana": "Beste Meeraussicht mit Panorama-Glasfront und großer Dachterrasse"
+    }
+  },
+  "features": {
+    "pool": "Pool",
+    "bbq": "Grill",
+    "garden": "Garten",
+    "parking": "Parkplatz",
+    "wheelchair-accessible": "Barrierefrei",
+    "terrace": "Terrasse",
+    "sea-view": "Meerblick",
+    "separate-unit": "Separater Bereich",
+    "panorama-view": "Panoramablick",
+    "glass-front": "Glasfront"
+  },
+  "info": {
+    "title": "Informationen",
+    "houseRules": {
+      "title": "Hausordnung",
+      "deposit": "Kaution",
+      "depositText": "€150 bar bei Ankunft (oder Überweisung bei Direktbuchung)",
+      "checkout": "Check-out",
+      "checkoutText": "Schlüssel auf den Tisch legen und Ana kontaktieren",
+      "smoking": "Rauchen",
+      "smokingText": "Nur im Außenbereich gestattet",
+      "cleaning": "Reinigung",
+      "cleaningText": "Endreinigung inklusive, bitte ordentlich hinterlassen"
+    },
+    "amenities": {
+      "title": "Ausstattung",
+      "wifi": "Kostenloses WLAN",
+      "tv": "Satellit-TV",
+      "kitchen": "Voll ausgestattete Küche",
+      "washer": "Waschmaschine & Trockner",
+      "linens": "Bettwäsche & Handtücher",
+      "basics": "Grundvorräte (Salz, Pfeffer, Öl)"
+    },
+    "arrival": {
+      "title": "Anreise",
+      "airport": "Flughafen Lissabon → Sesimbra: ca. 40 Minuten",
+      "car": "Mietwagen empfohlen",
+      "parking": "Parkplätze verfügbar"
+    },
+    "pets": {
+      "title": "Haustiere",
+      "allowed": "Hunde willkommen",
+      "fee": "€25 pro Aufenthalt",
+      "requirements": "Impfpass mit Tierarztstempel erforderlich",
+      "recommendation": "Leishmaniose-Impfung empfohlen"
+    }
+  },
+  "contact": {
+    "title": "Kontakt",
+    "subtitle": "Haben Sie Fragen oder möchten Sie buchen?",
+    "form": {
+      "name": "Name",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "message": "Nachricht",
+      "apartment": "Apartment",
+      "dates": "Reisezeitraum",
+      "guests": "Anzahl Gäste",
+      "submit": "Anfrage senden"
+    },
+    "directBooking": "Direkt buchen",
+    "orContact": "oder kontaktieren Sie uns"
+  },
+  "footer": {
+    "imprint": "Impressum",
+    "privacy": "Datenschutz",
+    "rights": "Alle Rechte vorbehalten",
+    "discoverArea": "Entdecke die Umgebung"
+  },
+  "common": {
+    "sqm": "m²",
+    "learnMore": "Mehr erfahren",
+    "close": "Schließen",
+    "next": "Weiter",
+    "previous": "Zurück",
+    "loading": "Laden..."
+  },
+  "errors": {
+    "404": {
+      "title": "Seite nicht gefunden",
+      "text": "Die angeforderte Seite existiert nicht.",
+      "backHome": "Zurück zur Startseite"
+    }
+  }
+}

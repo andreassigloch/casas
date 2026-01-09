@@ -1,0 +1,65 @@
+---
+/**
+ * Language Switcher Component
+ * @author andreas@siglochconsulting.de
+ *
+ * Displays language options: DE | EN | PT | FR
+ */
+
+import { locales, getLocaleFromUrl, getLocalizedPath, getLanguageName, type Locale } from '@i18n/index';
+
+const currentPath = Astro.url.pathname;
+const currentLocale = getLocaleFromUrl(Astro.url);
+---
+
+<div class="lang-switcher" data-testid="language-switcher">
+  {locales.map((locale) => (
+    <a
+      href={getLocalizedPath(currentPath, locale)}
+      class:list={['lang-btn', { active: locale === currentLocale }]}
+      aria-label={getLanguageName(locale)}
+      data-testid={`lang-${locale}`}
+      aria-current={locale === currentLocale ? 'page' : undefined}
+    >
+      {locale.toUpperCase()}
+    </a>
+  ))}
+</div>
+
+<style>
+  .lang-switcher {
+    display: flex;
+    gap: var(--space-1);
+    align-items: center;
+  }
+
+  .lang-btn {
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-background);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-base);
+    opacity: 0.7;
+  }
+
+  .lang-btn:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .lang-btn.active {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: var(--font-bold);
+  }
+
+  /* Separator between languages */
+  .lang-btn:not(:last-child)::after {
+    content: '|';
+    margin-left: var(--space-1);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+</style>

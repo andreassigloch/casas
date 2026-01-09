@@ -1,0 +1,355 @@
+---
+/**
+ * Anreise Info Page
+ * @author andreas@siglochconsulting.de
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import { siteConfig } from '@lib/config';
+---
+
+<BaseLayout
+  title="Anreise - Sesimbrinha"
+  description="So kommen Sie zu uns: Flughafen Lissabon, Mietwagen, Anfahrt und Check-in Informationen."
+>
+  <Header />
+
+  <main>
+    <PageHero
+      title="Anreise"
+      subtitle="Von Lissabon nach Sesimbra in 30-45 Minuten"
+      compact
+    />
+
+    <section class="info-content">
+      <div class="container">
+        <div class="content-wrapper">
+
+          <article class="info-section" data-testid="section-checkin">
+            <h2>Ankunft & Check-in</h2>
+            <p>
+              <strong>Ana</strong>, frei übersetzt die "gute Fee", begrüßt unsere Gäste persönlich, es sei denn,
+              sie kommen um halb vier Uhr morgens an. Obwohl sie nur portugiesisch spricht, ist das kein Problem.
+              In Ausnahmefällen finden Sie die Schlüssel in einem kleinen Tresor am Haus – wir verraten Ihnen
+              sogar den Code.
+            </p>
+            <p>
+              Wenn vorher, nachher oder zwischendurch etwas sein sollte, sind wir per SMS, WhatsApp, Anruf und
+              E-Mail erreichbar.
+            </p>
+            <p>
+              Bitte teilen Sie uns Ihre <strong>ungefähre Ankunftszeit im Voraus</strong> mit, damit Ana sich
+              entsprechend vorbereiten kann. Wenn Sie Kindermöbel oder eine Hundedecke benötigen, sollten wir
+              das ein paar Tage vorher wissen.
+            </p>
+            <p>
+              Bei Verspätungen oder kurzfristigen Änderungen jeglicher Art senden Sie bitte eine kurze Nachricht
+              an Ana: <strong>+351 933 398 889</strong>.
+            </p>
+          </article>
+
+          <article class="info-section" data-testid="section-auto">
+            <h2>Mit dem Auto</h2>
+            <p>
+              Unter normalen Verkehrsbedingungen dauert die Fahrt von Lissabon nach Sesimbra etwa
+              <strong>30-45 Minuten</strong>. Zu Stoßzeiten, typischerweise zwischen 8-10 Uhr und 18-21 Uhr,
+              kann es jedoch zu Staus kommen.
+            </p>
+
+            <h3>Navigation</h3>
+            <p>
+              Wenn Ihr Mietwagen kein Navigationssystem hat, können Sie sich auf Google Maps auf Ihrem Smartphone
+              verlassen. Geben Sie einfach ein:
+            </p>
+            <ul class="address-list">
+              <li><strong>Casa Eugenia:</strong> "Sesimbra, Beco Da Fonte Nova 2"</li>
+              <li><strong>Casal Regina:</strong> "Almoinha, Rua de Casal Regina 27"</li>
+            </ul>
+
+            <h3>Parken bei Casa Eugenia</h3>
+            <p>
+              Die Route führt Sie direkt zum Langzeitparkplatz bei Casa Eugenia – unter der Woche kostenlos,
+              derzeit einen Euro pro Tag am Wochenende. Die Zahlung kann auch per App erfolgen. Von hier aus
+              fahren Sie einfach kurz den Hügel runter und dann rechts wieder hoch, das dauert etwa drei Minuten.
+              Zum Be- und Entladen können Sie auch den Kurzzeitparkplatz nutzen.
+            </p>
+
+            <h3>Maut (Via Verde)</h3>
+            <p>
+              Wir empfehlen dringend, die <strong>"Via Verde"-Option</strong> für Ihren Mietwagen zu wählen.
+              Die Kosten sind überschaubar und Sie vermeiden, ein oder zwei Jahre später Grüße aus Portugal zu bekommen.
+              Die Zahlung erfolgt über einen Chip unter dem Rückspiegel, der automatisch die Mautgebühren erfasst.
+              So können Sie die Schlangen überspringen und die mit Via Verde gekennzeichneten Spuren nutzen.
+            </p>
+          </article>
+
+          <article class="info-section" data-testid="section-flughafen">
+            <h2>Flughafen Lissabon</h2>
+            <p>
+              Fast alle unsere Gäste kommen über den Flughafen in Portela nach Portugal.
+            </p>
+
+            <h3>Ankunft</h3>
+            <p>
+              Je nach Fluggesellschaft kommen Sie in Terminal 1 an. EU-Bürger gehen direkt zur Gepäckausgabe,
+              während Besucher aus Nicht-EU-Ländern zuerst eine automatisierte Passkontrolle durchlaufen.
+              Terminal 2 ist für Billigflieger, ein Shuttlebus verbindet es mit dem Hauptterminal.
+            </p>
+            <p>
+              Kinderwagen, Tiertransportboxen oder Surfbretter finden Sie hinter dem letzten Band, links vor
+              dem Ausgang. Wenn Sie den Zollbereich verlassen, biegen Sie rechts ab, um die Autovermietungen
+              zu finden.
+            </p>
+
+            <h3>Abreise</h3>
+            <p>
+              Am Abreisetag planen Sie bitte extra Zeit ein. Mietwagen-Rückgabe geht schnell, manchmal reicht
+              nur die Schlüsselabgabe. Die Abflughalle in Terminal 1 ist im ersten Stock.
+            </p>
+            <p>
+              Für EU- und Schengen-Flüge sollten Sie offiziell zwei Stunden vor Abflug da sein, was an manchen
+              Tagen knapp werden kann. Für Abflüge von Terminal 2 gehen Sie in den ersten Stock des Hauptterminals,
+              dann zum Parkplatz und in den Shuttlebus.
+            </p>
+          </article>
+
+          <article class="info-section" data-testid="section-checkout">
+            <h2>Check-out</h2>
+            <p>
+              Für den Abreisetag vereinbaren Sie bitte ein Treffen mit Ana bezüglich der Kaution und Energiekosten.
+              Wenn es zeitlich gar nicht passt, lassen Sie einfach die Schlüssel da, und wir regeln den Rest
+              über die Bank.
+            </p>
+          </article>
+
+          <aside class="info-sidebar">
+            <div class="sidebar-card highlight">
+              <h3>Kontakt Ana</h3>
+              <p>Vor Ort erreichbar per:</p>
+              <a href="tel:+351933398889" class="contact-link">+351 933 398 889</a>
+              <p class="small">SMS, WhatsApp, Anruf</p>
+            </div>
+            <div class="sidebar-card">
+              <h3>Adressen</h3>
+              <div class="address-block">
+                <strong>Casa Eugenia</strong>
+                <p>Beco Da Fonte Nova 2<br>2970-776 Sesimbra</p>
+              </div>
+              <div class="address-block">
+                <strong>Casal Regina</strong>
+                <p>Rua de Casal Regina 27<br>2970 Almoinha</p>
+              </div>
+            </div>
+            <div class="sidebar-card">
+              <h3>Fahrtzeit</h3>
+              <ul class="time-list">
+                <li>Flughafen → Sesimbra: 30-45 Min</li>
+                <li>Lissabon Zentrum: 40 Min</li>
+                <li>Stoßzeiten: +30-60 Min</li>
+              </ul>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="info-nav">
+      <div class="container">
+        <h3>Weitere Informationen</h3>
+        <div class="nav-links">
+          <a href="/info/hausordnung/" class="nav-link">Hausordnung</a>
+          <a href="/info/ausstattung/" class="nav-link">Ausstattung</a>
+          <a href="/info/haustiere/" class="nav-link">Haustiere</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .info-content {
+    padding: var(--space-12) 0;
+  }
+
+  .content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+  }
+
+  .info-section {
+    margin-bottom: var(--space-10);
+    padding-bottom: var(--space-10);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .info-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .info-section h2 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .info-section h3 {
+    font-size: var(--text-lg);
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-3);
+    color: var(--color-text);
+  }
+
+  .info-section p {
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+  }
+
+  .address-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-4) 0;
+    background: var(--color-background-alt);
+    border-radius: var(--radius-base);
+    padding: var(--space-4);
+  }
+
+  .address-list li {
+    padding: var(--space-2) 0;
+  }
+
+  .info-sidebar {
+    position: sticky;
+    top: var(--space-6);
+    align-self: start;
+  }
+
+  .sidebar-card {
+    background: var(--color-background-alt);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+  }
+
+  .sidebar-card.highlight {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .sidebar-card.highlight h3 {
+    color: white;
+  }
+
+  .sidebar-card.highlight .contact-link {
+    color: white;
+    font-size: var(--text-xl);
+  }
+
+  .sidebar-card.highlight .small {
+    opacity: 0.8;
+    font-size: var(--text-sm);
+    margin-top: var(--space-2);
+  }
+
+  .sidebar-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-4);
+    color: var(--color-primary);
+  }
+
+  .address-block {
+    margin-bottom: var(--space-4);
+  }
+
+  .address-block:last-child {
+    margin-bottom: 0;
+  }
+
+  .address-block strong {
+    display: block;
+    color: var(--color-text);
+    margin-bottom: var(--space-1);
+  }
+
+  .address-block p {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .time-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .time-list li {
+    padding: var(--space-2) 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .time-list li:last-child {
+    border-bottom: none;
+  }
+
+  .contact-link {
+    display: block;
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: var(--color-primary);
+  }
+
+  .info-nav {
+    padding: var(--space-12) 0;
+    background: var(--color-background-alt);
+    text-align: center;
+  }
+
+  .info-nav h3 {
+    margin-bottom: var(--space-6);
+  }
+
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-background);
+    border-radius: var(--radius-base);
+    color: var(--color-text);
+    transition: all var(--transition-base);
+  }
+
+  .nav-link:hover {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  @media (max-width: 900px) {
+    .content-wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    .info-sidebar {
+      position: static;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-4);
+    }
+
+    .sidebar-card {
+      margin-bottom: 0;
+    }
+  }
+</style>
