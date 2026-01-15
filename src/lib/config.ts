@@ -98,10 +98,6 @@ export const apartments = [
     bedrooms: 3,
     bathrooms: 2,
     features: ['pool', 'bbq', 'garden', 'parking', 'wheelchair-accessible'],
-    highlight: {
-      de: 'Renoviertes Bauernhaus der Urgroßmutter mit Pool und 5000m² Garten',
-      en: 'Renovated great-grandmother\'s farmhouse with pool and 5000m² garden',
-    },
     geo: { lat: 38.4712, lng: -9.1202 },
     images: [
       { src: '/images/apartments/casal-regina/19.webp', alt: 'Casal Regina - Außenbereich' },
@@ -139,10 +135,6 @@ export const apartments = [
     bedrooms: 2,
     bathrooms: 2,
     features: ['terrace', 'bbq', 'sea-view', 'separate-unit'],
-    highlight: {
-      de: 'Großzügige Dachterrasse mit BBQ direkt an der Strandpromenade',
-      en: 'Spacious rooftop terrace with BBQ right on the beach promenade',
-    },
     geo: { lat: 38.4437, lng: -9.1040 },
   },
   {
@@ -157,10 +149,6 @@ export const apartments = [
     bedrooms: 1,
     bathrooms: 1,
     features: ['terrace', 'bbq', 'panorama-view', 'glass-front'],
-    highlight: {
-      de: 'Beste Meeraussicht mit Panorama-Glasfront und großer Dachterrasse',
-      en: 'Best sea view with panoramic glass front and large rooftop terrace',
-    },
     geo: { lat: 38.4437, lng: -9.1040 },
   },
 ] as const;
@@ -218,7 +206,6 @@ export const organizationSchema = {
       itemOffered: {
         '@type': 'VacationRental',
         name: apt.name,
-        description: apt.highlight.de,
         numberOfRooms: apt.bedrooms,
         occupancy: {
           '@type': 'QuantitativeValue',

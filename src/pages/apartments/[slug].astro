@@ -10,15 +10,22 @@ import Footer from '../../components/Footer.astro';
 import ImageGallery from '../../components/ImageGallery.astro';
 import LeafletMap from '../../components/LeafletMap.astro';
 import { siteConfig, apartments } from '@lib/config';
+import { getCollection, render } from 'astro:content';
 
-export function getStaticPaths() {
-  return apartments.map((apt) => ({
-    params: { slug: apt.slug.de },
-    props: { apartment: apt },
-  }));
+export async function getStaticPaths() {
+  const apartmentContent = await getCollection('apartments', (entry) => entry.data.locale === 'de');
+
+  return apartments.map((apt) => {
+    const content = apartmentContent.find((c) => c.data.apartmentId === apt.id);
+    return {
+      params: { slug: apt.slug.de },
+      props: { apartment: apt, content },
+    };
+  });
 }
 
-const { apartment } = Astro.props;
+const { apartment, content } = Astro.props;
+const { Content } = content ? await render(content) : { Content: null };
 
 const featureLabels: Record<string, string> = {
   'pool': 'Pool',
@@ -36,7 +43,7 @@ const featureLabels: Record<string, string> = {
 
 <BaseLayout
   title={`${apartment.name} - Sesimbrinha`}
-  description={apartment.highlight.de}
+  description={content?.data.highlight || apartment.name}
 >
   <Header />
 
@@ -61,15 +68,10 @@ const featureLabels: Record<string, string> = {
           <div class="main-content">
             <h1>{apartment.name}</h1>
             <p class="location">{apartment.location}</p>
-            <p class="highlight">{apartment.highlight.de}</p>
+            <p class="highlight">{content?.data.highlight}</p>
 
             <div class="description">
-              <h2>Beschreibung</h2>
-              <p>
-                <!-- TODO: Add full description from content files -->
-                Detaillierte Beschreibung folgt. Bitte schauen Sie sich die Bilder an und
-                kontaktieren Sie uns für weitere Informationen.
-              </p>
+              {Content ? <Content /> : <p>Beschreibung folgt.</p>}
             </div>
 
             <div class="amenities">

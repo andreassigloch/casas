@@ -33,12 +33,7 @@
     "features": "Ausstattung",
     "location": "Lage",
     "book": "Anfrage senden",
-    "backToOverview": "Zurück zur Übersicht",
-    "highlights": {
-      "casal-regina": "Renoviertes Bauernhaus der Urgroßmutter mit Pool und 5000m² Garten",
-      "teresa": "Großzügige Dachterrasse mit BBQ direkt an der Strandpromenade",
-      "marceana": "Beste Meeraussicht mit Panorama-Glasfront und großer Dachterrasse"
-    }
+    "backToOverview": "Zurück zur Übersicht"
   },
   "features": {
     "pool": "Pool",

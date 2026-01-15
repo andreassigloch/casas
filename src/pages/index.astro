@@ -8,6 +8,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { siteConfig, apartments } from '@lib/config';
+import { getCollection } from 'astro:content';
+
+const apartmentContent = await getCollection('apartments', (entry) => entry.data.locale === 'de');
 ---
 
 <BaseLayout
@@ -49,7 +52,7 @@ import { siteConfig, apartments } from '@lib/config';
               <div class="apartment-content">
                 <h3>{apt.name}</h3>
                 <p class="apartment-location">{apt.location}</p>
-                <p class="apartment-highlight">{apt.highlight.de}</p>
+                <p class="apartment-highlight">{apartmentContent.find((c) => c.data.apartmentId === apt.id)?.data.highlight}</p>
                 <ul class="apartment-specs">
                   <li><strong>{apt.guests}</strong> Gäste</li>
                   <li><strong>{apt.bedrooms}</strong> Schlafzimmer</li>
