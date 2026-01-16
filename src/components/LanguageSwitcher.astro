@@ -4,27 +4,35 @@
  * @author andreas@siglochconsulting.de
  *
  * Displays language options: DE | EN | PT | FR
+ *
+ * Currently hidden until translations are available.
+ * Set SHOW_LANGUAGE_SWITCHER=true in config to enable.
  */
 
 import { locales, getLocaleFromUrl, getLocalizedPath, getLanguageName, type Locale } from '@i18n/index';
+
+// TODO: Enable when translations are ready (CR-003)
+const SHOW_LANGUAGE_SWITCHER = false;
 
 const currentPath = Astro.url.pathname;
 const currentLocale = getLocaleFromUrl(Astro.url);
 ---
 
-<div class="lang-switcher" data-testid="language-switcher">
-  {locales.map((locale) => (
-    <a
-      href={getLocalizedPath(currentPath, locale)}
-      class:list={['lang-btn', { active: locale === currentLocale }]}
-      aria-label={getLanguageName(locale)}
-      data-testid={`lang-${locale}`}
-      aria-current={locale === currentLocale ? 'page' : undefined}
-    >
-      {locale.toUpperCase()}
-    </a>
-  ))}
-</div>
+{SHOW_LANGUAGE_SWITCHER && (
+  <div class="lang-switcher" data-testid="language-switcher">
+    {locales.map((locale) => (
+      <a
+        href={getLocalizedPath(currentPath, locale)}
+        class:list={['lang-btn', { active: locale === currentLocale }]}
+        aria-label={getLanguageName(locale)}
+        data-testid={`lang-${locale}`}
+        aria-current={locale === currentLocale ? 'page' : undefined}
+      >
+        {locale.toUpperCase()}
+      </a>
+    ))}
+  </div>
+)}
 
 <style>
   .lang-switcher {

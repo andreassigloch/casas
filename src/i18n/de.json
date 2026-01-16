@@ -11,46 +11,76 @@
   },
   "home": {
     "hero": {
-      "title": "Urlaub in Sesimbra",
-      "subtitle": "Drei einzigartige Ferienwohnungen an Portugals schönster Küste"
+      "title": "Urlaub am Atlantik",
+      "subtitle": "Traumhafte Ferienhäuser & Apartments direkt an der portugiesischen Küste. Erleben Sie Sesimbra mit Meerblick, Pool und authentischem Charme.",
+      "ctaApartments": "Unterkünfte entdecken",
+      "ctaContact": "Mehr erfahren"
     },
     "apartments": {
-      "title": "Unsere Apartments",
-      "cta": "Alle Apartments ansehen"
+      "title": "Unsere Unterkünfte",
+      "cta": "Details ansehen →"
     },
     "about": {
-      "title": "Über uns",
-      "text": "Familiengeführte Ferienwohnungen mit persönlicher Betreuung vor Ort."
+      "title": "Familiengeschichte seit Generationen",
+      "text1": "Unsere Ferienwohnungen sind mehr als nur Unterkünfte – sie sind Teil einer Familiengeschichte. Das Landhaus Casal Regina war einst das Bauernhaus unserer Urgroßmutter, liebevoll renoviert im Jahr 2020. Die Apartments Teresa und Marceana tragen die Namen unserer Großmütter und liegen direkt an der Strandpromenade von Sesimbra.",
+      "text2": "Ana, unsere Vermieterin vor Ort, kümmert sich persönlich um Ihren Aufenthalt – von der Schlüsselübergabe bis zu Insider-Tipps für die besten Restaurants.",
+      "cta": "Mehr über uns"
     }
   },
   "apartments": {
     "title": "Unsere Ferienwohnungen",
+    "subtitle": "Wählen Sie Ihr Zuhause für den perfekten Portugal-Urlaub",
     "guests": "Gäste",
     "bedrooms": "Schlafzimmer",
     "bathrooms": "Bäder",
+    "bath": "Bad",
     "size": "Wohnfläche",
     "outdoor": "Außenbereich",
     "features": "Ausstattung",
     "location": "Lage",
-    "book": "Anfrage senden",
-    "backToOverview": "Zurück zur Übersicht"
+    "book": "Verfügbarkeit anfragen",
+    "backToOverview": "Zurück zur Übersicht",
+    "detailsCta": "Details & Bilder →",
+    "atAGlance": "Auf einen Blick",
+    "description": "Beschreibung",
+    "descriptionPlaceholder": "Beschreibung folgt.",
+    "bookingNote": "Auch buchbar auf",
+    "typeHouse": "Landhaus",
+    "typeApartment": "Apartment",
+    "amenities": {
+      "title": "Ausstattung",
+      "wifi": "WiFi",
+      "tv": "Satellit-TV",
+      "kitchen": "Voll ausgestattete Küche",
+      "washer": "Waschmaschine & Trockner",
+      "linens": "Bettwäsche & Handtücher",
+      "coffee": "Kaffeemaschine"
+    },
+    "infoCta": {
+      "title": "Wichtige Informationen",
+      "houseRules": "Hausordnung & Check-in",
+      "arrival": "Anreise & Parken",
+      "pets": "Mit Hund reisen",
+      "discover": "Sesimbra entdecken →"
+    }
   },
   "features": {
     "pool": "Pool",
-    "bbq": "Grill",
+    "bbq": "BBQ/Grill",
     "garden": "Garten",
     "parking": "Parkplatz",
-    "wheelchair-accessible": "Barrierefrei",
+    "wheelchair-accessible": "Barrierefreie Duschen",
     "terrace": "Terrasse",
     "sea-view": "Meerblick",
-    "separate-unit": "Separater Bereich",
+    "separate-unit": "Separater Bereich mit eigenem Bad",
     "panorama-view": "Panoramablick",
-    "glass-front": "Glasfront"
+    "glass-front": "Panorama-Glasfront"
   },
   "info": {
     "title": "Informationen",
     "houseRules": {
       "title": "Hausordnung",
+      "subtitle": "Check-in, Kaution, Regeln",
       "deposit": "Kaution",
       "depositText": "€150 bar bei Ankunft (oder Überweisung bei Direktbuchung)",
       "checkout": "Check-out",
@@ -62,6 +92,7 @@
     },
     "amenities": {
       "title": "Ausstattung",
+      "subtitle": "WiFi, TV, voll ausgestattete Küche",
       "wifi": "Kostenloses WLAN",
       "tv": "Satellit-TV",
       "kitchen": "Voll ausgestattete Küche",
@@ -71,12 +102,14 @@
     },
     "arrival": {
       "title": "Anreise",
+      "subtitle": "40 Min. vom Flughafen Lissabon",
       "airport": "Flughafen Lissabon → Sesimbra: ca. 40 Minuten",
       "car": "Mietwagen empfohlen",
       "parking": "Parkplätze verfügbar"
     },
     "pets": {
       "title": "Haustiere",
+      "subtitle": "Hunde willkommen (€25)",
       "allowed": "Hunde willkommen",
       "fee": "€25 pro Aufenthalt",
       "requirements": "Impfpass mit Tierarztstempel erforderlich",
@@ -111,7 +144,12 @@
     "close": "Schließen",
     "next": "Weiter",
     "previous": "Zurück",
-    "loading": "Laden..."
+    "loading": "Laden...",
+    "goodToKnow": "Gut zu wissen",
+    "readyForVacation": "Bereit für Ihren Sesimbra-Urlaub?",
+    "readyForVacationText": "Schreiben Sie uns für Verfügbarkeit und Preise – wir antworten innerhalb von 24 Stunden.",
+    "inquireNow": "Jetzt anfragen",
+    "discoverSesimbra": "Sesimbra entdecken auf stuff.sesimbrinha.de →"
   },
   "errors": {
     "404": {

@@ -12,7 +12,16 @@
       "Bash(npm install:*)",
       "Bash(curl:*)",
       "Bash(lsof:*)",
-      "Bash(git fsck:*)"
+      "Bash(git fsck:*)",
+      "Bash(git branch:*)",
+      "Bash(git diff:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(npm run dev:*)",
+      "Bash(git rm:*)",
+      "Bash(git filter-branch:*)",
+      "Bash(git stash:*)"
     ]
   }
 }

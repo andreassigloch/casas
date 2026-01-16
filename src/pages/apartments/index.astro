@@ -10,33 +10,26 @@ import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 import { siteConfig, apartments } from '@lib/config';
 import { getCollection } from 'astro:content';
+import { t, getLocaleFromUrl, getTranslations } from '@i18n/index';
 
-const apartmentContent = await getCollection('apartments', (entry) => entry.data.locale === 'de');
+const locale = getLocaleFromUrl(Astro.url);
+const translations = getTranslations(locale);
+const apartmentContent = await getCollection('apartments', (entry) => entry.data.locale === locale);
 
-const featureLabels: Record<string, string> = {
-  'pool': 'Pool',
-  'bbq': 'BBQ/Grill',
-  'garden': 'Garten',
-  'parking': 'Parkplatz',
-  'wheelchair-accessible': 'Barrierefrei',
-  'terrace': 'Terrasse',
-  'sea-view': 'Meerblick',
-  'separate-unit': 'Separater Bereich',
-  'panorama-view': 'Panoramablick',
-  'glass-front': 'Glasfront',
-};
+// Feature labels from i18n
+const featureLabels = translations.features as Record<string, string>;
 ---
 
 <BaseLayout
-  title="Apartments - Sesimbrinha"
-  description="Drei einzigartige Ferienwohnungen in Sesimbra: Landhaus mit Pool oder Strandpromenade mit Meerblick."
+  title={`${t('apartments.title', locale)} - Sesimbrinha`}
+  description={t('meta.description', locale)}
 >
   <Header />
 
   <main>
     <PageHero
-      title="Unsere Ferienwohnungen"
-      subtitle="Wählen Sie Ihr Zuhause für den perfekten Portugal-Urlaub"
+      title={t('apartments.title', locale)}
+      subtitle={t('apartments.subtitle', locale)}
     />
 
     <section class="apartments-list">
@@ -47,7 +40,7 @@ const featureLabels: Record<string, string> = {
               {apt.images && apt.images.length > 0 && (
                 <img src={apt.images[0].src} alt={apt.images[0].alt} loading="lazy" />
               )}
-              <div class="apartment-badge">{apt.type === 'house' ? 'Landhaus' : 'Apartment'}</div>
+              <div class="apartment-badge">{apt.type === 'house' ? t('apartments.typeHouse', locale) : t('apartments.typeApartment', locale)}</div>
             </div>
             <div class="apartment-info">
               <h2>{apt.name}</h2>
@@ -57,19 +50,19 @@ const featureLabels: Record<string, string> = {
               <div class="specs">
                 <div class="spec">
                   <span class="spec-value">{apt.guests}</span>
-                  <span class="spec-label">Gäste</span>
+                  <span class="spec-label">{t('apartments.guests', locale)}</span>
                 </div>
                 <div class="spec">
                   <span class="spec-value">{apt.bedrooms}</span>
-                  <span class="spec-label">Schlafzimmer</span>
+                  <span class="spec-label">{t('apartments.bedrooms', locale)}</span>
                 </div>
                 <div class="spec">
                   <span class="spec-value">{apt.bathrooms}</span>
-                  <span class="spec-label">Bäder</span>
+                  <span class="spec-label">{t('apartments.bathrooms', locale)}</span>
                 </div>
                 <div class="spec">
-                  <span class="spec-value">{apt.size.indoor}m²</span>
-                  <span class="spec-label">Wohnfläche</span>
+                  <span class="spec-value">{apt.size.indoor}{t('common.sqm', locale)}</span>
+                  <span class="spec-label">{t('apartments.size', locale)}</span>
                 </div>
               </div>
 
@@ -79,8 +72,8 @@ const featureLabels: Record<string, string> = {
                 ))}
               </ul>
 
-              <a href={`/apartments/${apt.slug.de}/`} class="button button-primary">
-                Details & Bilder →
+              <a href={`/apartments/${apt.slug[locale] || apt.slug.de}/`} class="button button-primary">
+                {t('apartments.detailsCta', locale)}
               </a>
             </div>
           </article>

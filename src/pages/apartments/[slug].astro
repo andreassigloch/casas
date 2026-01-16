@@ -11,6 +11,10 @@ import ImageGallery from '../../components/ImageGallery.astro';
 import LeafletMap from '../../components/LeafletMap.astro';
 import { siteConfig, apartments } from '@lib/config';
 import { getCollection, render } from 'astro:content';
+import { t, getLocaleFromUrl, getTranslations } from '@i18n/index';
+
+const locale = getLocaleFromUrl(Astro.url);
+const translations = getTranslations(locale);
 
 export async function getStaticPaths() {
   const apartmentContent = await getCollection('apartments', (entry) => entry.data.locale === 'de');
@@ -27,18 +31,8 @@ export async function getStaticPaths() {
 const { apartment, content } = Astro.props;
 const { Content } = content ? await render(content) : { Content: null };
 
-const featureLabels: Record<string, string> = {
-  'pool': 'Pool',
-  'bbq': 'BBQ/Grill',
-  'garden': 'Garten',
-  'parking': 'Parkplatz',
-  'wheelchair-accessible': 'Barrierefreie Duschen',
-  'terrace': 'Terrasse',
-  'sea-view': 'Meerblick',
-  'separate-unit': 'Separater Bereich mit eigenem Bad',
-  'panorama-view': 'Panoramablick',
-  'glass-front': 'Panorama-Glasfront',
-};
+// Feature labels from i18n
+const featureLabels = translations.features as Record<string, string>;
 ---
 
 <BaseLayout
@@ -55,7 +49,7 @@ const featureLabels: Record<string, string> = {
           <ImageGallery images={apartment.images} apartmentName={apartment.name} />
         ) : (
           <div class="gallery-placeholder">
-            <div class="apartment-badge">{apartment.type === 'house' ? 'Landhaus' : 'Apartment'}</div>
+            <div class="apartment-badge">{apartment.type === 'house' ? t('apartments.typeHouse', locale) : t('apartments.typeApartment', locale)}</div>
           </div>
         )}
       </div>
@@ -71,18 +65,18 @@ const featureLabels: Record<string, string> = {
             <p class="highlight">{content?.data.highlight}</p>
 
             <div class="description">
-              {Content ? <Content /> : <p>Beschreibung folgt.</p>}
+              {Content ? <Content /> : <p>{t('apartments.descriptionPlaceholder', locale)}</p>}
             </div>
 
             <div class="amenities">
-              <h2>Ausstattung</h2>
+              <h2>{t('apartments.amenities.title', locale)}</h2>
               <ul class="amenities-list">
-                <li>WiFi</li>
-                <li>Satellit-TV</li>
-                <li>Voll ausgestattete Küche</li>
-                <li>Waschmaschine & Trockner</li>
-                <li>Bettwäsche & Handtücher</li>
-                <li>Kaffeemaschine</li>
+                <li>{t('apartments.amenities.wifi', locale)}</li>
+                <li>{t('apartments.amenities.tv', locale)}</li>
+                <li>{t('apartments.amenities.kitchen', locale)}</li>
+                <li>{t('apartments.amenities.washer', locale)}</li>
+                <li>{t('apartments.amenities.linens', locale)}</li>
+                <li>{t('apartments.amenities.coffee', locale)}</li>
                 {apartment.features.map((f) => (
                   <li>{featureLabels[f] || f}</li>
                 ))}
@@ -92,29 +86,29 @@ const featureLabels: Record<string, string> = {
 
           <aside class="sidebar">
             <div class="booking-card">
-              <h3>Auf einen Blick</h3>
+              <h3>{t('apartments.atAGlance', locale)}</h3>
 
               <div class="specs-grid">
                 <div class="spec">
                   <span class="spec-icon">👥</span>
-                  <span class="spec-value">{apartment.guests} Gäste</span>
+                  <span class="spec-value">{apartment.guests} {t('apartments.guests', locale)}</span>
                 </div>
                 <div class="spec">
                   <span class="spec-icon">🛏️</span>
-                  <span class="spec-value">{apartment.bedrooms} Schlafzimmer</span>
+                  <span class="spec-value">{apartment.bedrooms} {t('apartments.bedrooms', locale)}</span>
                 </div>
                 <div class="spec">
                   <span class="spec-icon">🚿</span>
-                  <span class="spec-value">{apartment.bathrooms} {apartment.bathrooms === 1 ? 'Bad' : 'Bäder'}</span>
+                  <span class="spec-value">{apartment.bathrooms} {apartment.bathrooms === 1 ? t('apartments.bath', locale) : t('apartments.bathrooms', locale)}</span>
                 </div>
                 <div class="spec">
                   <span class="spec-icon">📐</span>
-                  <span class="spec-value">{apartment.size.indoor}m² innen</span>
+                  <span class="spec-value">{apartment.size.indoor}{t('common.sqm', locale)} {t('apartments.size', locale)}</span>
                 </div>
                 {apartment.size.outdoor > 100 && (
                   <div class="spec">
                     <span class="spec-icon">🌳</span>
-                    <span class="spec-value">{apartment.size.outdoor}m² außen</span>
+                    <span class="spec-value">{apartment.size.outdoor}{t('common.sqm', locale)} {t('apartments.outdoor', locale)}</span>
                   </div>
                 )}
               </div>
@@ -126,18 +120,18 @@ const featureLabels: Record<string, string> = {
               </div>
 
               <a href="/kontakt/" class="button button-primary button-full">
-                Verfügbarkeit anfragen
+                {t('apartments.book', locale)}
               </a>
 
               <p class="booking-note">
-                Auch buchbar auf
-                <a href="#" target="_blank" rel="noopener">Airbnb</a> und
+                {t('apartments.bookingNote', locale)}
+                <a href="#" target="_blank" rel="noopener">Airbnb</a> &
                 <a href="#" target="_blank" rel="noopener">Booking.com</a>
               </p>
             </div>
 
             <div class="location-card">
-              <h3>Lage</h3>
+              <h3>{t('apartments.location', locale)}</h3>
               <p class="address">{apartment.address}</p>
               <LeafletMap
                 lat={apartment.geo.lat}
@@ -154,19 +148,19 @@ const featureLabels: Record<string, string> = {
     <!-- More Info CTA -->
     <section class="info-cta">
       <div class="container">
-        <h2>Wichtige Informationen</h2>
+        <h2>{t('apartments.infoCta.title', locale)}</h2>
         <div class="info-links">
           <a href="/info/hausordnung/" class="info-link">
-            <span>📋</span> Hausordnung & Check-in
+            <span>📋</span> {t('apartments.infoCta.houseRules', locale)}
           </a>
           <a href="/info/anreise/" class="info-link">
-            <span>✈️</span> Anreise & Parken
+            <span>✈️</span> {t('apartments.infoCta.arrival', locale)}
           </a>
           <a href="/info/haustiere/" class="info-link">
-            <span>🐕</span> Mit Hund reisen
+            <span>🐕</span> {t('apartments.infoCta.pets', locale)}
           </a>
           <a href={siteConfig.stuffUrl} class="info-link" target="_blank" rel="noopener">
-            <span>🗺️</span> Sesimbra entdecken →
+            <span>🗺️</span> {t('apartments.infoCta.discover', locale)}
           </a>
         </div>
       </div>

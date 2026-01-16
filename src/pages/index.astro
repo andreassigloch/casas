@@ -9,8 +9,10 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { siteConfig, apartments } from '@lib/config';
 import { getCollection } from 'astro:content';
+import { t, getLocaleFromUrl } from '@i18n/index';
 
-const apartmentContent = await getCollection('apartments', (entry) => entry.data.locale === 'de');
+const locale = getLocaleFromUrl(Astro.url);
+const apartmentContent = await getCollection('apartments', (entry) => entry.data.locale === locale);
 ---
 
 <BaseLayout
@@ -23,14 +25,14 @@ const apartmentContent = await getCollection('apartments', (entry) => entry.data
     <!-- Hero Section -->
     <section class="hero" data-testid="hero-section">
       <div class="container hero-content">
-        <h1>Urlaub am Atlantik</h1>
-        <p>Traumhafte Ferienhäuser & Apartments direkt an der portugiesischen Küste. Erleben Sie Sesimbra mit Meerblick, Pool und authentischem Charme.</p>
+        <h1>{t('home.hero.title', locale)}</h1>
+        <p>{t('home.hero.subtitle', locale)}</p>
         <div class="hero-actions">
           <a href="/apartments/" class="button button-accent" data-testid="cta-apartments">
-            Unterkünfte entdecken
+            {t('home.hero.ctaApartments', locale)}
           </a>
           <a href="/kontakt/" class="button button-outline" data-testid="cta-contact">
-            Mehr erfahren
+            {t('home.hero.ctaContact', locale)}
           </a>
         </div>
       </div>
@@ -39,26 +41,26 @@ const apartmentContent = await getCollection('apartments', (entry) => entry.data
     <!-- Apartments Grid -->
     <section class="apartments-section" data-testid="apartments-section">
       <div class="container">
-        <h2>Unsere Unterkünfte</h2>
+        <h2>{t('home.apartments.title', locale)}</h2>
         <div class="apartments-grid">
           {apartments.map((apt) => (
-            <a href={`/apartments/${apt.slug.de}/`} class="apartment-card" data-testid={`apartment-${apt.id}`}>
+            <a href={`/apartments/${apt.slug[locale] || apt.slug.de}/`} class="apartment-card" data-testid={`apartment-${apt.id}`}>
               <div class="apartment-image">
                 {apt.images && apt.images.length > 0 && (
                   <img src={apt.images[0].src} alt={apt.images[0].alt} loading="lazy" />
                 )}
-                <div class="apartment-badge">{apt.type === 'house' ? 'Landhaus' : 'Apartment'}</div>
+                <div class="apartment-badge">{apt.type === 'house' ? t('apartments.typeHouse', locale) : t('apartments.typeApartment', locale)}</div>
               </div>
               <div class="apartment-content">
                 <h3>{apt.name}</h3>
                 <p class="apartment-location">{apt.location}</p>
                 <p class="apartment-highlight">{apartmentContent.find((c) => c.data.apartmentId === apt.id)?.data.highlight}</p>
                 <ul class="apartment-specs">
-                  <li><strong>{apt.guests}</strong> Gäste</li>
-                  <li><strong>{apt.bedrooms}</strong> Schlafzimmer</li>
-                  <li><strong>{apt.size.indoor}</strong>m² Wohnfläche</li>
+                  <li><strong>{apt.guests}</strong> {t('apartments.guests', locale)}</li>
+                  <li><strong>{apt.bedrooms}</strong> {t('apartments.bedrooms', locale)}</li>
+                  <li><strong>{apt.size.indoor}</strong>{t('common.sqm', locale)} {t('apartments.size', locale)}</li>
                 </ul>
-                <span class="apartment-link">Details ansehen →</span>
+                <span class="apartment-link">{t('home.apartments.cta', locale)}</span>
               </div>
             </a>
           ))}
@@ -70,20 +72,11 @@ const apartmentContent = await getCollection('apartments', (entry) => entry.data
     <section class="about-section" data-testid="about-section">
       <div class="container">
         <div class="about-content">
-          <h2>Familiengeschichte seit Generationen</h2>
-          <p>
-            Unsere Ferienwohnungen sind mehr als nur Unterkünfte – sie sind Teil einer
-            Familiengeschichte. Das Landhaus <strong>Casal Regina</strong> war einst das
-            Bauernhaus unserer Urgroßmutter, liebevoll renoviert im Jahr 2020. Die Apartments
-            <strong>Teresa</strong> und <strong>Marceana</strong> tragen die Namen unserer
-            Großmütter und liegen direkt an der Strandpromenade von Sesimbra.
-          </p>
-          <p>
-            Ana, unsere Vermieterin vor Ort, kümmert sich persönlich um Ihren Aufenthalt –
-            von der Schlüsselübergabe bis zu Insider-Tipps für die besten Restaurants.
-          </p>
+          <h2>{t('home.about.title', locale)}</h2>
+          <p set:html={t('home.about.text1', locale)} />
+          <p>{t('home.about.text2', locale)}</p>
           <a href={siteConfig.stuffUrl} class="button button-secondary" target="_blank" rel="noopener">
-            Sesimbra entdecken auf stuff.sesimbrinha.de →
+            {t('common.discoverSesimbra', locale)}
           </a>
         </div>
       </div>
@@ -92,27 +85,27 @@ const apartmentContent = await getCollection('apartments', (entry) => entry.data
     <!-- Quick Info -->
     <section class="info-section" data-testid="info-section">
       <div class="container">
-        <h2>Gut zu wissen</h2>
+        <h2>{t('common.goodToKnow', locale)}</h2>
         <div class="info-grid">
           <a href="/info/anreise/" class="info-card" data-testid="info-arrival">
             <span class="info-icon">✈️</span>
-            <h3>Anreise</h3>
-            <p>40 Min. vom Flughafen Lissabon</p>
+            <h3>{t('info.arrival.title', locale)}</h3>
+            <p>{t('info.arrival.subtitle', locale)}</p>
           </a>
           <a href="/info/haustiere/" class="info-card" data-testid="info-pets">
             <span class="info-icon">🐕</span>
-            <h3>Haustiere</h3>
-            <p>Hunde willkommen (€25)</p>
+            <h3>{t('info.pets.title', locale)}</h3>
+            <p>{t('info.pets.subtitle', locale)}</p>
           </a>
           <a href="/info/ausstattung/" class="info-card" data-testid="info-amenities">
             <span class="info-icon">📶</span>
-            <h3>Ausstattung</h3>
-            <p>WiFi, TV, voll ausgestattete Küche</p>
+            <h3>{t('info.amenities.title', locale)}</h3>
+            <p>{t('info.amenities.subtitle', locale)}</p>
           </a>
           <a href="/info/hausordnung/" class="info-card" data-testid="info-rules">
             <span class="info-icon">📋</span>
-            <h3>Hausordnung</h3>
-            <p>Check-in, Kaution, Regeln</p>
+            <h3>{t('info.houseRules.title', locale)}</h3>
+            <p>{t('info.houseRules.subtitle', locale)}</p>
           </a>
         </div>
       </div>
@@ -121,9 +114,9 @@ const apartmentContent = await getCollection('apartments', (entry) => entry.data
     <!-- CTA Section -->
     <section class="cta-section" data-testid="cta-section">
       <div class="container">
-        <h2>Bereit für Ihren Sesimbra-Urlaub?</h2>
-        <p>Schreiben Sie uns für Verfügbarkeit und Preise – wir antworten innerhalb von 24 Stunden.</p>
-        <a href="/kontakt/" class="button button-primary button-large">Jetzt anfragen</a>
+        <h2>{t('common.readyForVacation', locale)}</h2>
+        <p>{t('common.readyForVacationText', locale)}</p>
+        <a href="/kontakt/" class="button button-primary button-large">{t('common.inquireNow', locale)}</a>
       </div>
     </section>
   </main>
