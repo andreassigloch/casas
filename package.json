@@ -12,6 +12,7 @@
     "compliance": "npx tsx scripts/compliance-check.ts"
   },
   "dependencies": {
+    "@sigloch/quality-checkers": "github:andreassigloch/sigloch-modules#v0.1.0&path=packages/quality-checkers",
     "@fontsource/poppins": "^5.2.7",
     "astro": "^5.0.0",
     "deepl-node": "^1.14.0"
